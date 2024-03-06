@@ -20,15 +20,7 @@ what <- read_csv("../../../STAT112/final/ignite_afterschool/MSS_22-19-16_trend-R
 ```
 ## Assumption
 
-Assume that all of the following counts as afterschool activities:
-- I stay at my school or go to another school \
-- My home or another home such as a friend's, relative's or neighbor's \
-- A rec, community or other youth center \
-- A park or other outdoor space \
-- A library \
-- A church, synagogue, mosque, or other spiritual/religious place \ 
-
-These are A34A, A34B, A34C,.. A34F in the table.
+- Answer of "quite a bit" or "very much" to EITHER of A56D(Teachers) or A56E(Other adults at school), which asks how much you feel a specific group cares about you
 
 
 ## Wrangling
@@ -44,35 +36,6 @@ main
 ```{r}
 A56 <- main %>%
   select(County, A56A, A56B, A56D, A56E, A56F, Region)
-
-A56comp <- data20162022 %>% 
-  select(year, A56A, A56B, A56D, A56E, A56F)
-```
-
-```{r}
-# Identify rows with NA values
-rows_with_na <- A56[!complete.cases(A56), ]
-
-# Print rows with NA values
-print(rows_with_na)
-```
-```{r}
-A56comp %>%
-  group_by(year) %>%
-  #count(A56D)
-  mutate(
-    caringadult = if_else(A56A > 4 | A56B > 4 | A56F > 4, TRUE, FALSE)
-  ) %>%
-  summarise(
-    total = n(),
-    caringadult_true = sum(caringadult == TRUE, na.rm = TRUE),
-    caringadult_false = sum(caringadult == FALSE, na.rm = TRUE),
-    caringadult_na = sum(is.na(caringadult)),
-    percent_true = caringadult_true / total *100,
-    percent_false = caringadult_false / total *100,
-    percent_unknown = caringadult_na/ total * 100
-  ) 
-
 ```
 
 ```{r}
@@ -97,8 +60,8 @@ clean_report <- report %>%
 
 ## Result
 ```{r}
-write_csv(report, "../result/afterschool_x3_report.csv")
-write_csv(clean_report, "../result/clean_afterschool_x3_report.csv")
+write_csv(report, "../result/caringadult_report.csv")
+write_csv(clean_report, "../result/clean_caringadult_report.csv")
 
 ```
 

@@ -1,0 +1,26 @@
+
+
+```{r}
+library(readr)
+library(dplyr)
+library(readxl)
+```
+
+
+## Load libraries and data
+
+```{r}
+library(readr)
+library(dplyr)
+library(readxl)
+```
+
+```{r}
+county_code <- read_csv("complete_county_dict.csv")
+```
+
+```{r}
+main <- read_csv("../data/ignite_afterschool/MSS22_Race_NoCounty/MSS22-3RaceNoCounty+Region.csv")
+```
+
+

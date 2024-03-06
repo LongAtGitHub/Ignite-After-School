@@ -27,7 +27,12 @@ Assume that all of the following counts as afterschool activities:
 - A church, synagogue, mosque, or other spiritual/religious place \ 
 
 These are A34A, A34B, A34C,.. A34F in the table.
-
+A34 value
+1-	0 days
+2-	1 day
+3-	2 days
+4-	3 to 4 days
+5-	5 days
 
 ## Wrangling
 
@@ -56,6 +61,7 @@ print(rows_with_na)
 report <- A34 %>%
   group_by(Region) %>%
   mutate(
+    across(starts_with("A34"), ~replace_na(., 0)),
     afterschool = if_else(A34A > 3 | A34B > 3 | A34C > 3 | A34D > 3 | A34E > 3 | A34F > 3, TRUE, FALSE)
   ) %>%
   summarise(
@@ -73,9 +79,33 @@ clean_report <- report %>%
 ```
 
 ## Result
+These show by region how many youths not regularly active in afterschool activities (>= 3 times a week).
+
+```{r}
+clean_report
+```
+
 ```{r}
 write_csv(report, "../result/afterschool_x3_report.csv")
 write_csv(clean_report, "../result/clean_afterschool_x3_report.csv")
+```
 
+## Result 2 (Bonus) - How many respondents make up the youth surveys in a region
+
+```{r}
+region_perc <- report %>% 
+  
+  summarize(
+    Region= Region,
+    sum = sum(total),
+    region_count= total,
+    region_perc = total/ sum * 100,
+    )
+
+region_perc <- region_perc %>%  select(Region, region_perc, region_count, sum)
+```
+
+```{r}
+write_csv(region_perc, "../result/region_percent_survey.csv")
 ```
 

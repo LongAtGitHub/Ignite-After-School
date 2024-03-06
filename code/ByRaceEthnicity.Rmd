@@ -1,0 +1,66 @@
+
+
+```{r}
+data <- read_csv("../data/ignite_afterschool/MSS22_Race_NoCounty/MSS22-3RaceNoCounty+Region.csv")
+```
+
+## Wrangling
+Assume that after school active students are like this again:
+that all of the following counts as afterschool activities:
+- I stay at my school or go to another school \
+- My home or another home such as a friend's, relative's or neighbor's \
+- A rec, community or other youth center \
+- A park or other outdoor space \
+- A library \
+- A church, synagogue, mosque, or other spiritual/religious place \ 
+
+These are A34A, A34B, A34C,.. A34F at scale more than 3 in the table.
+afterschool = if_else(A34A > 3 | A34B > 3 | A34C > 3 | A34D > 3 | A34E > 3 | A34F > 3, TRUE, FALSE)
+
+
+```{r}
+data <- data %>% mutate(
+    # Replace NA values with 0
+    across(starts_with("A34"), ~replace_na(., 0)),
+    # Calculate afterschool based on conditions
+    afterschool = if_else(A34A > 3 | A34B > 3 | A34C > 3 | A34D > 3 | A34E > 3 | A34F > 3, TRUE, FALSE)
+)
+
+```
+
+By Race/Ethnicity, 
+A3G - 0/1, 1 means white, 0 means youth of color \
+A5E - Hmong \
+A6F - Somali\
+
+```{r}
+main_data <- data %>% select(A34A, A34B, A34C, A34D, A34E, A34F,A3G, A5E, A6F, afterschool)
+
+main_data %>% head()
+```
+
+```{r}
+race_report <- function(col, name, edge_case_youth_color= FALSE) {
+  val=1
+  if (edge_case_youth_color) { 
+    val = 0
+    col = `A3G`
+  }
+  report<- data %>% 
+    filter(A3G == val) %>% 
+    summarize(
+      name=name,
+      count_afterschool_active = sum(afterschool == TRUE),
+      count_afterschool_not_active = sum(afterschool == FALSE)
+    )
+  return (report)
+}
+```
+
+```{r}
+race_report(A3G, "white")
+race_report(A3G, "w", edge_case_youth_color = TRUE)
+race_report(A3G, "white")
+race_report(A3G, "white")
+```
+

@@ -55,7 +55,17 @@ report <- A56 %>%
   ) 
 
 clean_report <- report %>%
-  select(Region, percent_true, percent_false, percent_unknown, total)
+  select(Region, percent_true, percent_false, percent_unknown, total) %>% 
+  mutate(PctIncreaseInDontCare = case_when(
+    Region == "Twin Cities" ~ -1,
+    Region == "Central" ~ 3,
+    Region == "Northland" ~ 3,
+    Region == "Northwest" ~ 2,
+    Region == "West Central" ~ 5,
+    Region == "Southern" ~ 13,
+    Region == "Southwest" ~ 3
+  ))
+
 ```
 
 ## Result

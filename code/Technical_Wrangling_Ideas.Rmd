@@ -1,0 +1,35 @@
+
+Some assumption to be made
+## Assumption 1
+
+Assume that all of the following counts as afterschool activities:
+- I stay at my school or go to another school \
+- My home or another home such as a friend's, relative's or neighbor's \
+- A rec, community or other youth center \
+- A park or other outdoor space \
+- A library \
+- A church, synagogue, mosque, or other spiritual/religious place \ 
+
+These are A34A, A34B, A34C,.. A34F in the table.
+A34 value
+1-	0 days
+2-	1 day
+3-	2 days
+4-	3 to 4 days
+5-	5 days
+
+So
+```{r}
+mutate(
+    across(starts_with("A34"), ~replace_na(., 0)),
+    afterschool = if_else(A34A > 3 | A34B > 3 | A34C > 3 | A34D > 3 | A34E > 3 | A34F > 3, TRUE, FALSE)
+```
+
+
+## Assumption 2
+Above, I made an assumption that if a box is left NA, then it will default to 0 so easier computation, hence 
+```{r}
+across(starts_with("A34"), ~replace_na(., 0)),
+```
+
+across(starts_with("A34"), ~replace_na(., 0)),

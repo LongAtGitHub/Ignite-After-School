@@ -1,6 +1,11 @@
 
 
 ```{r}
+library(tidyverse)
+```
+
+
+```{r}
 data <- read_csv("../data/ignite_afterschool/MSS22_Race_NoCounty/MSS22-3RaceNoCounty+Region.csv")
 ```
 
@@ -25,8 +30,15 @@ data <- data %>% mutate(
     # Calculate afterschool based on conditions
     afterschool = if_else(A34A > 3 | A34B > 3 | A34C > 3 | A34D > 3 | A34E > 3 | A34F > 3, TRUE, FALSE)
 )
+county_code <- read_csv("complete_county_dict.csv")
+data <- data %>% left_join( county_code, 
+           by=c('County'='Code'))
+
+
 
 ```
+
+
 
 By Race/Ethnicity, 
 A3G - 0/1, 1 means white, 0 means youth of color \
@@ -34,33 +46,59 @@ A5E - Hmong \
 A6F - Somali\
 
 ```{r}
-main_data <- data %>% select(A34A, A34B, A34C, A34D, A34E, A34F,A3G, A5E, A6F, afterschool)
+main_data <- data %>% select(A34A, A34B, A34C, A34D, A34E, A34F,A3G, A5E, A6F, afterschool, County)
 
-main_data %>% head()
+
 ```
 
 ```{r}
-race_report <- function(col, name, edge_case_youth_color= FALSE) {
-  val=1
-  if (edge_case_youth_color) { 
-    val = 0
-    col = `A3G`
+race_report <- function(col, name, edge_case_youth_color = FALSE, by_region='all') {
+  if (by_region == 'all') {
+    val <- 1
+    if (edge_case_youth_color) { 
+      val <- 0
+      col <- data$A3G
+    }
+    report <- data %>% 
+      filter(col == val) %>% 
+      summarize(
+        name = name,
+        count_afterschool_active = sum(afterschool == TRUE),
+        count_afterschool_not_active = sum(afterschool == FALSE),
+        percentage_afterschool_active = count_afterschool_active / n() * 100,
+        percentage_afterschool_not_active = count_afterschool_not_active  / n() * 100
+      )
+  
+  return(report)
   }
-  report<- data %>% 
-    filter(A3G == val) %>% 
-    summarize(
-      name=name,
-      count_afterschool_active = sum(afterschool == TRUE),
-      count_afterschool_not_active = sum(afterschool == FALSE)
-    )
-  return (report)
+  else {
+    val <- 1
+    if (edge_case_youth_color) { 
+      val <- 0
+      col <- data$A3G
+    }
+    report <- data %>% 
+      filter(filter(col == val) %>% 
+      group_by(Region)
+      summarize(
+        name = name,
+        count_afterschool_active = sum(afterschool == TRUE),
+        count_afterschool_not_active = sum(afterschool == FALSE),
+        percentage_afterschool_active = count_afterschool_active / n() * 100,
+        percentage_afterschool_not_active = count_afterschool_not_active  / n() * 100
+      )
+  
+  return(report)
+  }
+  
 }
+
 ```
 
 ```{r}
-race_report(A3G, "white")
-race_report(A3G, "w", edge_case_youth_color = TRUE)
-race_report(A3G, "white")
-race_report(A3G, "white")
+white <-race_report(data$A3G, "White")
+color<-race_report(data$A3G, "Color", edge_case_youth_color = TRUE)
+hmong <- race_report(data$A5E, "Hmong")
+race_report(data$A6F, "Somali")
 ```
 

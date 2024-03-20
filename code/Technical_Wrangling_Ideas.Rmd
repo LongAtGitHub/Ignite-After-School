@@ -19,17 +19,20 @@ A34 value
 5-	5 days
 
 So
-```{r}
+```
 mutate(
     across(starts_with("A34"), ~replace_na(., 0)),
     afterschool = if_else(A34A > 3 | A34B > 3 | A34C > 3 | A34D > 3 | A34E > 3 | A34F > 3, TRUE, FALSE)
+)
 ```
 
 
 ## Assumption 2
 Above, I made an assumption that if a box is left NA, then it will default to 0 so easier computation, hence 
-```{r}
+```
 across(starts_with("A34"), ~replace_na(., 0)),
 ```
 
+```
 across(starts_with("A34"), ~replace_na(., 0)),
+```

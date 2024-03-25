@@ -1,0 +1,81 @@
+---
+title: "test_new_file"
+output: html_document
+date: "2024-03-06"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Update data briefs on engagement after school
+
+## Load libraries and data
+
+```{r}
+library(readr)
+library(dplyr)
+library(readxl)
+```
+
+```{r}
+county_code <- read_csv("complete_county_dict.csv")
+```
+
+```{r}
+main <- read_csv("../data/MSS22-3CountyNoRace/MSS22-3CountyNoRace.csv")
+
+```
+
+#A16
+#A17A-E
+
+## Wrangling
+
+```{r}
+# Mutate main by county code
+main <- main %>% left_join( county_code, 
+           by=c('County'='Code'))
+
+main
+```
+
+```{r}
+A34 <- main %>%
+  select(County, A34A, A34B, A34C, A34D, A34D, A34E, A34F, Region)
+```
+
+```{r}
+# Identify rows with NA values
+rows_with_na <- A34[!complete.cases(A34), ]
+
+# Print rows with NA values
+print(rows_with_na)
+```
+
+```{r}
+report <- A34 %>%
+  group_by(Region) %>%
+  mutate(
+    afterschool = if_else(A34A > 3 | A34B > 3 | A34C > 3 | A34D > 3 | A34E > 3 | A34F > 3, TRUE, FALSE)
+  ) %>%
+  summarise(
+    total = n(),
+    afterschool_true = sum(afterschool == TRUE, na.rm = TRUE),
+    afterschool_false = sum(afterschool == FALSE, na.rm = TRUE),
+    afterschool_na = sum(is.na(afterschool)),
+    percent_true = afterschool_true / total *100,
+    percent_false = afterschool_false / total *100,
+    percent_unknown = afterschool_na/ total * 100
+  ) 
+
+clean_report <- report %>%
+  select(Region, percent_true, percent_false, percent_unknown, total)
+```
+
+## Result
+```{r}
+write_csv(report, "../result/afterschool_x3_report.csv")
+write_csv(clean_report, "../result/clean_afterschool_x3_report.csv")
+
+```

@@ -1,0 +1,14 @@
+---
+title: "Milestone 3 Blog"
+format: html
+editor: visual
+---
+
+## Results
+
+1.  Motivate the importance of the topic
+2.  Lead the reader through the rationale for the narrowing/focusing of the scope via the main 2-3 broad questions
+3.  Tie results (plots and modeling output) to the broad questions and explain how all results fit together
+4.  End with main takeaways, limitations with regard to the data context and ethical considerations, and future directions
+
+## 

@@ -7,11 +7,14 @@ editor: visual
 ## Results
 
 1.  Motivate the importance of the topic
-2.  Lead the reader through the rationale for the narrowing/focusing of the scope via the main 2-3 broad questions
+
+For our project, we have partnered with Ignite Afterschool, an education and advocacy non-profit based in the Twin Cities, to update data briefs that they create for parents and the general public. We have utilized the Minnesota Student Survey to provide answers about afterschool engagement and outcomes across Minnesota which included analysis of disparities based on race, income, and region.
+
+1.  Lead the reader through the rationale for the narrowing/focusing of the scope via the main 2-3 broad questions
     1.  What information is available in the MSS (Minnesota Student Survey)  and how can we use it to update the existing briefs?
     2.  What other information may be helpful to ignite afterschool’s data briefs and how should we present our findings to them?
     3.  What questions on the survey relate to the recent legalization of cannabis in Minnesota? Are there other sources we could draw from to supplement the MSS?
-3.  Tie results (plots and modeling output) to the broad questions and explain how all results fit together
-4.  End with main takeaways, limitations with regard to the data context and ethical considerations, and future directions
+
+Our main questions were largely determined based on Ignite’s needs which were to update the existing briefs using the 2022 survey and have an understanding of what data was available including any information that may be relevant to the recent legalization of cannabis in Minnesota. We first identified variables of interest related to afterschool...
 
 ## 

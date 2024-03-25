@@ -8,6 +8,9 @@ editor: visual
 
 1.  Motivate the importance of the topic
 2.  Lead the reader through the rationale for the narrowing/focusing of the scope via the main 2-3 broad questions
+    1.  What information is available in the MSS (Minnesota Student Survey)  and how can we use it to update the existing briefs?
+    2.  What other information may be helpful to ignite afterschool’s data briefs and how should we present our findings to them?
+    3.  What questions on the survey relate to the recent legalization of cannabis in Minnesota? Are there other sources we could draw from to supplement the MSS?
 3.  Tie results (plots and modeling output) to the broad questions and explain how all results fit together
 4.  End with main takeaways, limitations with regard to the data context and ethical considerations, and future directions
 

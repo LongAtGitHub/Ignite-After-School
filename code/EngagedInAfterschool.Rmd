@@ -16,7 +16,11 @@ county_code <- read_csv("complete_county_dict.csv")
 ```{r}
 main <- read_csv("../data/ignite_afterschool/MSS22-3CountyNoRace/MSS22-3CountyNoRace.csv")
 ```
+
+
 ## Assumption
+
+Use County No Race table
 
 Assume that all of the following counts as afterschool activities:
 - I stay at my school or go to another school \

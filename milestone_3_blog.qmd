@@ -15,6 +15,6 @@ For our project, we have partnered with Ignite Afterschool, an education and adv
     2.  What other information may be helpful to ignite afterschool’s data briefs and how should we present our findings to them?
     3.  What questions on the survey relate to the recent legalization of cannabis in Minnesota? Are there other sources we could draw from to supplement the MSS?
 
-Our main questions were largely determined based on Ignite’s needs which were to update the existing briefs using the 2022 survey and have an understanding of what data was available including any information that may be relevant to the recent legalization of cannabis in Minnesota. We first identified variables of interest related to afterschool...
+Our main questions were largely determined based on Ignite’s needs which were to update the existing briefs using the 2022 survey and have an understanding of what data was available including any information that may be relevant to the recent legalization of cannabis in Minnesota. We first identified variables of interest including race, variables related to being connected to a caring adult, engaging in after school activities 3 times a week, resource related variables, and region. We then found the variables related to drug and alcohol use and presented the available questions to ignite.
 
 ## 

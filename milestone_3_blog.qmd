@@ -8,7 +8,7 @@ editor: visual
 
 1.  Motivate the importance of the topic
 
-For our project, we have partnered with Ignite Afterschool, an education and advocacy non-profit based in the Twin Cities, to update data briefs that they create for parents and the general public. We have utilized the Minnesota Student Survey to provide answers about afterschool engagement and outcomes across Minnesota which included analysis of disparities based on race, income, and region.
+For our project, we have partnered with Ignite Afterschool, an education and advocacy non-profit based in the Twin Cities, to update data briefs that they create for parents and the general public. We have utilized the Minnesota Student Survey to provide answers about afterschool engagement and outcomes across Minnesota youth in year 2022 which included analysis of disparities based on race, income, and region.
 
 1.  Lead the reader through the rationale for the narrowing/focusing of the scope via the main 2-3 broad questions
     1.  What information is available in the MSS (Minnesota Student Survey)  and how can we use it to update the existing briefs?

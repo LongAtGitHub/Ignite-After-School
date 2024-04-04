@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -60,12 +94,15 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="results" class="level2">
-<h2 class="anchored" data-anchor-id="results">Results</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <ol type="1">
 <li>Motivate the importance of the topic</li>
 </ol>
-<p>For our project, we have partnered with Ignite Afterschool, an education and advocacy non-profit based in the Twin Cities, to update data briefs that they create for parents and the general public. We have utilized the Minnesota Student Survey to provide answers about afterschool engagement and outcomes across Minnesota which included analysis of disparities based on race, income, and region.</p>
+<p>For our project, we have partnered with Ignite Afterschool, an education and advocacy non-profit based in the Twin Cities, to update data briefs that they create for parents and the general public. We have utilized the Minnesota Student Survey to provide answers about afterschool engagement and outcomes across Minnesota youth in year 2022 which included analysis of disparities based on race, income, and region.</p>
 <ol type="1">
 <li>Lead the reader through the rationale for the narrowing/focusing of the scope via the main 2-3 broad questions
 <ol type="1">
@@ -74,10 +111,127 @@ ul.task-list li input[type="checkbox"] {
 <li>What questions on the survey relate to the recent legalization of cannabis in Minnesota? Are there other sources we could draw from to supplement the MSS?</li>
 </ol></li>
 </ol>
-<p>Our main questions were largely determined based on Ignite’s needs which were to update the existing briefs using the 2022 survey and have an understanding of what data was available including any information that may be relevant to the recent legalization of cannabis in Minnesota. We first identified variables of interest related to afterschool…</p>
+<p>Our main questions were largely determined based on Ignite’s needs which were to update the existing briefs using the 2022 survey and have an understanding of what data was available including any information that may be relevant to the recent legalization of cannabis in Minnesota. We first identified variables of interest including race, variables related to being connected to a caring adult, engaging in after school activities 3 times a week, resource related variables, and region. We then found the variables related to drug and alcohol use and presented the available questions to ignite.</p>
+<section id="overall-status" class="level3">
+<h3 class="anchored" data-anchor-id="overall-status">Overall Status</h3>
+<p>We’ve made significant progress in analyzing afterschool activities and monitoring the behaviors of Minnesota youth, updating briefs for Ignite Afterschool Non-Profit and analyzed the Cannabis situation. Here’s an overview of our subtask progress:</p>
+<ul>
+<li>Survey Data Analysis: Completed</li>
+<li>Engagement in Afterschool Activities: Completed</li>
+<li>Caring Adults: Completed</li>
+<li>Income Gap: Ongoing, encountered roadblock</li>
+<li>Race Ethnicity: Ongoing, encountered roadblock</li>
+<li>Cannabis Report: Completed, Analyzed</li>
+</ul>
 </section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
+<section id="survey-data-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="survey-data-analysis">Survey Data Analysis</h3>
+<p>We’ve aggregated survey data to understand afterschool activity participation across different regions of Minnesota. For detailed insights, refer to the Part 2 bonus in the EngagedInAfterschool.rmd file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"result/region_percent_survey.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 7 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): Region
+dbl (3): region_perc, region_count, sum
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>survey</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 4
+  Region       region_perc region_count    sum
+  &lt;chr&gt;              &lt;dbl&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+1 Central            14.8         19984 135447
+2 Northland           5.02         6804 135447
+3 Northwest           2.91         3946 135447
+4 Southern           15.0         20368 135447
+5 Southwest           4.73         6402 135447
+6 Twin Cities        53.1         71899 135447
+7 West Central        4.46         6044 135447</code></pre>
+</div>
+</div>
+<p>Engagement in Afterschool Activities (3+ Times/Week) Through data wrangling, we’ve determined the number of students engaging in afterschool activities frequently. For more technical details, please refer to EngagedInAftersschool.rmd.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>afterschoolx3 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"result/clean_afterschool_x3_report.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 7 Columns: 5
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): Region
+dbl (4): percent_true, percent_false, percent_unknown, total
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>afterschoolx3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 5
+  Region       percent_true percent_false percent_unknown total
+  &lt;chr&gt;               &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;
+1 Central              76.2          23.8               0 19984
+2 Northland            75.5          24.5               0  6804
+3 Northwest            74.2          25.8               0  3946
+4 Southern             75.2          24.8               0 20368
+5 Southwest            72.9          27.1               0  6402
+6 Twin Cities          73.6          26.4               0 71899
+7 West Central         76.2          23.8               0  6044</code></pre>
+</div>
+</div>
+</section>
+<section id="caring-adults" class="level3">
+<h3 class="anchored" data-anchor-id="caring-adults">Caring Adults</h3>
+<p>We’ve examined the percentage of youth connected to caring adults across different regions, comparing it to 2017 data. This comparison helps us understand trends in adult-youth connections.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>caring <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"result/clean_caringadult_report.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 7 Columns: 6
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): Region
+dbl (5): percent_true, percent_false, percent_unknown, total, PctIncreaseInD...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>caring</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 6
+  Region  percent_true percent_false percent_unknown total PctIncreaseInDontCare
+  &lt;chr&gt;          &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;                 &lt;dbl&gt;
+1 Central         46.7          45.0            8.33 19984                     3
+2 Northl…         44.4          46.1            9.45  6804                     3
+3 Northw…         47.8          43.7            8.46  3946                     2
+4 Southe…         46.7          43.8            9.49 20368                    13
+5 Southw…         48.9          42.1            9.03  6402                     3
+6 Twin C…         49.7          38.2           12.2  71899                    -1
+7 West C…         49.0          42.9            8.17  6044                     5</code></pre>
+</div>
+</div>
+</section>
+<section id="income-and-race" class="level3">
+<h3 class="anchored" data-anchor-id="income-and-race">Income and Race</h3>
+<p>Our analysis encountered roadblocks due to insufficient data. For race, we lack necessary variables, and for income, we’re still working on gathering more data to draw meaningful insights.</p>
+</section>
+<section id="the-cannabis-report" class="level3">
+<h3 class="anchored" data-anchor-id="the-cannabis-report">The Cannabis Report</h3>
+<p>In this section, we’ve focused on analyzing the Minnesota Cannabis Report. Unlike previous sections involving data wrangling, we’ve directly extracted relevant insights from the original report done directly by the Minnesota Department of Education. This approach offers a different perspective on understanding youth behaviors.</p>
+<p>For a detailed analysis, please refer to the <a href="https://docs.google.com/document/d/1L46I7ujxrKbMHMFkZnTt8oIH1bnxZcQj3Bjs2AhOSYs/edit?usp=sharing">Cannabis Report</a>.</p>
+</section>
+<section id="tying-results-together" class="level3">
+<h3 class="anchored" data-anchor-id="tying-results-together">Tying Results Together</h3>
+<p>The topics covered in our analysis hold significant importance for understanding youth behaviors and informing afterschool program initiatives. Our main questions revolve around:</p>
+<p>How are Minnesota youth engaging in afterschool activities, and what factors influence their participation? What is the role of caring adults in youth development, and how does it vary across regions? How do socioeconomic factors, such as income and race, intersect with afterschool engagement?</p>
+<p>What is the cannabis usage situation in Minnesota youth?</p>
+<p>Despite encountering data limitations, our analysis sheds light on key aspects. However, further data collection and refinement are necessary for a comprehensive understanding.</p>
+</section>
+</section>
+<section id="main-takeaways-and-future-directions" class="level2">
+<h2 class="anchored" data-anchor-id="main-takeaways-and-future-directions">Main Takeaways and Future Directions</h2>
+<p>Our analysis highlights the importance of afterschool programs and the need for targeted interventions to support youth development. While we’ve made progress in some areas, challenges remain, particularly in accessing relevant data. Future efforts should focus on addressing these challenges and expanding the scope of our analysis to encompass a broader range of factors influencing youth outcomes.</p>
+<p>It’s essential to acknowledge the limitations of our analysis, including data constraints and ethical considerations regarding youth privacy. Moving forward, collaboration with relevant stakeholders and continued data collection efforts will enhance the depth and reliability of our findings.</p>
 </section>
 
 </main>

@@ -4,7 +4,11 @@ format: html
 editor: visual
 ---
 
-## Results
+```{r}
+library(readr)
+```
+
+## Introduction
 
 1.  Motivate the importance of the topic
 
@@ -17,4 +21,60 @@ For our project, we have partnered with Ignite Afterschool, an education and adv
 
 Our main questions were largely determined based on Ignite’s needs which were to update the existing briefs using the 2022 survey and have an understanding of what data was available including any information that may be relevant to the recent legalization of cannabis in Minnesota. We first identified variables of interest including race, variables related to being connected to a caring adult, engaging in after school activities 3 times a week, resource related variables, and region. We then found the variables related to drug and alcohol use and presented the available questions to ignite.
 
-## 
+### Overall Status
+We've made significant progress in analyzing afterschool activities and monitoring the behaviors of Minnesota youth, updating briefs for Ignite Afterschool Non-Profit and analyzed the Cannabis situation. Here's an overview of our subtask progress:
+
+- Survey Data Analysis: Completed
+- Engagement in Afterschool Activities: Completed
+- Caring Adults: Completed
+- Income Gap: Ongoing, encountered roadblock
+- Race Ethnicity: Ongoing, encountered roadblock
+- Cannabis Report: Completed, Analyzed
+
+### Survey Data Analysis
+We've aggregated survey data to understand afterschool activity participation across different regions of Minnesota. For detailed insights, refer to the Part 2 bonus in the EngagedInAfterschool.rmd file.
+
+```{r}
+survey <- read_csv("result/region_percent_survey.csv")
+survey
+```
+
+Engagement in Afterschool Activities (3+ Times/Week)
+Through data wrangling, we've determined the number of students engaging in afterschool activities frequently. For more technical details, please refer to EngagedInAftersschool.rmd.
+
+```{r}
+afterschoolx3 <- read_csv("result/clean_afterschool_x3_report.csv")
+afterschoolx3
+```
+
+### Caring Adults
+We've examined the percentage of youth connected to caring adults across different regions, comparing it to 2017 data. This comparison helps us understand trends in adult-youth connections.
+
+```{r}
+caring <- read_csv("result/clean_caringadult_report.csv")
+caring
+```
+
+### Income and Race
+Our analysis encountered roadblocks due to insufficient data. For race, we lack necessary variables, and for income, we're still working on gathering more data to draw meaningful insights.
+
+### The Cannabis Report
+In this section, we've focused on analyzing the Minnesota Cannabis Report. Unlike previous sections involving data wrangling, we've directly extracted relevant insights from the original report done directly by the Minnesota Department of Education. This approach offers a different perspective on understanding youth behaviors.
+
+For a detailed analysis, please refer to the [Cannabis Report](https://docs.google.com/document/d/1L46I7ujxrKbMHMFkZnTt8oIH1bnxZcQj3Bjs2AhOSYs/edit?usp=sharing).
+
+### Tying Results Together
+The topics covered in our analysis hold significant importance for understanding youth behaviors and informing afterschool program initiatives. Our main questions revolve around:
+
+How are Minnesota youth engaging in afterschool activities, and what factors influence their participation?
+What is the role of caring adults in youth development, and how does it vary across regions?
+How do socioeconomic factors, such as income and race, intersect with afterschool engagement?
+
+What is the cannabis usage situation in Minnesota youth?
+
+Despite encountering data limitations, our analysis sheds light on key aspects. However, further data collection and refinement are necessary for a comprehensive understanding.
+
+## Main Takeaways and Future Directions
+Our analysis highlights the importance of afterschool programs and the need for targeted interventions to support youth development. While we've made progress in some areas, challenges remain, particularly in accessing relevant data. Future efforts should focus on addressing these challenges and expanding the scope of our analysis to encompass a broader range of factors influencing youth outcomes.
+
+It's essential to acknowledge the limitations of our analysis, including data constraints and ethical considerations regarding youth privacy. Moving forward, collaboration with relevant stakeholders and continued data collection efforts will enhance the depth and reliability of our findings.

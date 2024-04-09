@@ -2,7 +2,7 @@
 Some assumption to be made
 ## Assumption 1
 
-F
+
 
 Assume that all of the following counts as afterschool activities:
 - I stay at my school or go to another school \

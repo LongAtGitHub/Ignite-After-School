@@ -4,10 +4,14 @@
 library(tidyverse)
 ```
 
+```{r}
+source("Wrangling.r")
+```
 
 ```{r}
 data <- read_csv("../data/ignite_afterschool/MSS22_Race_NoCounty/MSS22-3RaceNoCounty+Region.csv")
 ```
+
 
 ## Wrangling
 Assume that after school active students are like this again:
@@ -22,83 +26,40 @@ that all of the following counts as afterschool activities:
 These are A34A, A34B, A34C,.. A34F at scale more than 3 in the table.
 afterschool = if_else(A34A > 3 | A34B > 3 | A34C > 3 | A34D > 3 | A34E > 3 | A34F > 3, TRUE, FALSE)
 
-
 ```{r}
-data <- data %>% mutate(
-    # Replace NA values with 0
+A34 <- data %>%
+  select(Region, A34A, A34B, A34C, A34D, A34D, A34E, A34F, `A3G`, `A5E`, `A3A`)
+```
+
+Also it is important to note that the region is only either 1 (7-County Twin Cities Metro Area) or 2 (Greater Minnesota). It can be (0) undefined too.
+
+A3G White youth
+5E. If you are Asian, South Asian or Asian American, which group best describes you? (If more than one describes you, Mark ALL that apply) - Hmong
+3A. How do you describe yourself? (Mark ALL that apply) - American Indian or Alaskan Native
+Youth of color = all - white
+```{r}
+report <- A34 %>%
+  group_by(Region) %>%
+  mutate(
     across(starts_with("A34"), ~replace_na(., 0)),
-    # Calculate afterschool based on conditions
     afterschool = if_else(A34A > 3 | A34B > 3 | A34C > 3 | A34D > 3 | A34E > 3 | A34F > 3, TRUE, FALSE)
-)
-county_code <- read_csv("complete_county_dict.csv")
-data <- data %>% left_join( county_code, 
-           by=c('County'='Code'))
-
-
+  ) %>% 
+  summarize(
+    hmong = count(A5E == 1 && afterschool == TRUE) / count(A5E == 1)
+  )
 
 ```
-
-
-
-By Race/Ethnicity, 
-A3G - 0/1, 1 means white, 0 means youth of color \
-A5E - Hmong \
-A6F - Somali\
-
 ```{r}
-main_data <- data %>% select(A34A, A34B, A34C, A34D, A34E, A34F,A3G, A5E, A6F, afterschool, County)
-
-
+report <- report %>% select(Region, afterschool, `A3G`, `A5E`, `A3A`)
 ```
 
 ```{r}
-race_report <- function(col, name, edge_case_youth_color = FALSE, by_region='all') {
-  if (by_region == 'all') {
-    val <- 1
-    if (edge_case_youth_color) { 
-      val <- 0
-      col <- data$A3G
-    }
-    report <- data %>% 
-      filter(col == val) %>% 
-      summarize(
-        name = name,
-        count_afterschool_active = sum(afterschool == TRUE),
-        count_afterschool_not_active = sum(afterschool == FALSE),
-        percentage_afterschool_active = count_afterschool_active / n() * 100,
-        percentage_afterschool_not_active = count_afterschool_not_active  / n() * 100
-      )
-  
-  return(report)
-  }
-  else {
-    val <- 1
-    if (edge_case_youth_color) { 
-      val <- 0
-      col <- data$A3G
-    }
-    report <- data %>% 
-      filter(filter(col == val) %>% 
-      group_by(Region)
-      summarize(
-        name = name,
-        count_afterschool_active = sum(afterschool == TRUE),
-        count_afterschool_not_active = sum(afterschool == FALSE),
-        percentage_afterschool_active = count_afterschool_active / n() * 100,
-        percentage_afterschool_not_active = count_afterschool_not_active  / n() * 100
-      )
-  
-  return(report)
-  }
-  
-}
-
+report %>%  
 ```
+
 
 ```{r}
-white <-race_report(data$A3G, "White")
-color<-race_report(data$A3G, "Color", edge_case_youth_color = TRUE)
-hmong <- race_report(data$A5E, "Hmong")
-race_report(data$A6F, "Somali")
+count_occurrences(report$A5E)
 ```
+
 

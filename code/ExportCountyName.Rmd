@@ -1,0 +1,101 @@
+# Export County Name
+
+## Steps
+
+```{r}
+library(readxl)
+library(dplyr)
+library(stringr)
+```
+
+From the document on county code name, create a table:
+```{r}
+county <- read_excel("county_code_name.xlsx")
+```
+
+Based on this data, we can mutate to decide on the region of a county is in.
+https://www.mncompass.org/profiles/region
+
+```{r}
+central_counties  <- c("Benton", "Cass", "Chisago", "Crow Wing", "Isanti", "Kanabec", "Mille Lacs", "Morrison", "Pine", "Sherburne", "Stearns", "Todd", "Wadena", "Wright")
+
+northland_counties <- c("Aitkin", "Carlton", "Cook", "Itasca", "Koochiching", "Lake", "St. Louis")
+
+northwest_counties <- c("Beltrami", "Clearwater", "Hubbard", "Kittson", "Lake of the Woods", "Mahnomen", "Marshall", "Norman", "Pennington", "Polk", "Red Lake", "Roseau")
+
+southern_counties <- c("Blue Earth", "Brown", "Dodge", "Faribault", "Fillmore", "Freeborn", "Goodhue", "Houston", "Le Sueur", "Martin", "Mower", "Nicollet", "Olmsted", "Rice", "Sibley", "Steele", "Wabasha", "Waseca", "Watonwan", "Winona")
+
+southwest_counties <- c("Big Stone", "Chippewa", "Cottonwood", "Jackson", "Kandiyohi", "Lac qui Parle", "Lincoln", "Lyon", "McLeod", "Meeker", "Murray", "Nobles", "Pipestone", "Redwood", "Renville", "Rock", "Swift", "Yellow Medicine")
+
+twincities_counties <- c("Anoka", "Carver", "Dakota", "Hennepin", "Ramsey", "Scott", "Washington")
+
+westcentral_counties <- c("Becker", "Clay", "Douglas", "Grant", "Otter Tail", "Pope", "Stevens", "Traverse", "Wilkin")
+```
+
+Mutate:
+in county, the name follows the format ANOKA COUNTY, while the region table follows Anoka. 
+
+```{r}
+# Define a function to assign region based on county name
+assign_region <- function(county_name) {
+  county_name <- tolower(sub(" COUNTY$", "", county_name))
+  if (county_name %in% tolower(c("Benton", "Cass", "Chisago", "Crow Wing", "Isanti", "Kanabec", "Mille Lacs", "Morrison", "Pine", "Sherburne", "Stearns", "Todd", "Wadena", "Wright"))) {
+    return("Central")
+  } else if (county_name %in% tolower(c("Aitkin", "Carlton", "Cook", "Itasca", "Koochiching", "Lake", "St. Louis"))) {
+    return("Northland")
+  } else if (county_name %in% tolower(c("Beltrami", "Clearwater", "Hubbard", "Kittson", "Lake of the Woods", "Mahnomen", "Marshall", "Norman", "Pennington", "Polk", "Red Lake", "Roseau"))) {
+    return("Northwest")
+  } else if (county_name %in% tolower(c("Blue Earth", "Brown", "Dodge", "Faribault", "Fillmore", "Freeborn", "Goodhue", "Houston", "Le Sueur", "Martin", "Mower", "Nicollet", "Olmsted", "Rice", "Sibley", "Steele", "Wabasha", "Waseca", "Watonwan", "Winona"))) {
+    return("Southern")
+  } else if (county_name %in% tolower(c("Big Stone", "Chippewa", "Cottonwood", "Jackson", "Kandiyohi", "Lac qui Parle", "Lincoln", "Lyon", "McLeod", "Meeker", "Murray", "Nobles", "Pipestone", "Redwood", "Renville", "Rock", "Swift", "Yellow Medicine"))) {
+    return("Southwest")
+  } else if (county_name %in% tolower(c("Anoka", "Carver", "Dakota", "Hennepin", "Ramsey", "Scott", "Washington"))) {
+    return("Twin Cities")
+  } else if (county_name %in% tolower(c("Becker", "Clay", "Douglas", "Grant", "Otter Tail", "Pope", "Stevens", "Traverse", "Wilkin"))) {
+    return("West Central")
+  } else {
+    return("Unknown")
+  }
+}
+
+# Define a function to clean and format county names
+clean_county_name <- function(county_name) {
+  county_name <- str_to_title(county_name)
+  county_name <- str_replace_all(county_name, " County", "")
+  return(county_name)
+}
+
+```
+
+```{r}
+county$Region <- sapply(county$Name, assign_region)
+```
+
+
+```{r}
+# Mutate the region column based on the county lists
+county$Region <- sapply(county$Name, assign_region)
+
+# mutate clean name
+county$County <- sapply(county$Name, clean_county_name)
+```
+
+
+Check for unknown value
+```{r}
+county %>% filter(
+  Region == "Unknown"
+)
+```
+
+Leuseur is supposed to be Southern but grepl does not regcognize it since the compared name of Leusuer has a space in it ( Le Sueur). Hard code it by hand
+
+```{r}
+county$Region[county$Name == "LESUEUR COUNTY"] <- "Southern"
+```
+
+## Final
+```{r}
+write.csv(county, file = "complete_county_dict.csv", row.names = FALSE)
+```
+

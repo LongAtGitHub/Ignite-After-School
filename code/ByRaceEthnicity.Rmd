@@ -4,9 +4,6 @@
 library(tidyverse)
 ```
 
-```{r}
-source("Wrangling.r")
-```
 
 ```{r}
 data <- read_csv("../data/ignite_afterschool/MSS22_Race_NoCounty/MSS22-3RaceNoCounty+Region.csv")
@@ -34,32 +31,42 @@ A34 <- data %>%
 Also it is important to note that the region is only either 1 (7-County Twin Cities Metro Area) or 2 (Greater Minnesota). It can be (0) undefined too.
 
 A3G White youth
-5E. If you are Asian, South Asian or Asian American, which group best describes you? (If more than one describes you, Mark ALL that apply) - Hmong
-3A. How do you describe yourself? (Mark ALL that apply) - American Indian or Alaskan Native
-Youth of color = all - white
+A5E. If you are Asian, South Asian or Asian American, which group best describes you? (If more than one describes you, Mark ALL that apply) - Hmong
+A3A. How do you describe yourself? (Mark ALL that apply) - American Indian or Alaskan Native
+
 ```{r}
 report <- A34 %>%
-  group_by(Region) %>%
   mutate(
     across(starts_with("A34"), ~replace_na(., 0)),
     afterschool = if_else(A34A > 3 | A34B > 3 | A34C > 3 | A34D > 3 | A34E > 3 | A34F > 3, TRUE, FALSE)
   ) %>% 
+  group_by(Region) %>% 
   summarize(
-    hmong = count(A5E == 1 && afterschool == TRUE) / count(A5E == 1)
+    white = sum(A3G ==1 & afterschool == TRUE,  na.rm = TRUE ) / sum(A3G==1,  na.rm = TRUE) * 100, 
+    hmong = sum(A5E == 1 & afterschool == TRUE,  na.rm = TRUE) / sum(A5E == 1,  na.rm = TRUE)*100,
+    american_indian = sum(A3A == 1 & afterschool == TRUE,  na.rm = TRUE) / sum(A3A == 1,  na.rm = TRUE) * 100
+    
   )
 
 ```
+
+## Rename and write csv
 ```{r}
-report <- report %>% select(Region, afterschool, `A3G`, `A5E`, `A3A`)
+report <- report %>%
+  mutate(
+    Region = case_when(
+      Region == 1 ~ "Twin Cities Metro Area",
+      Region == 2 ~ "Greater Minnesota",
+      TRUE ~ as.character(Region)  # Handles any other values gracefully
+    )
+  )
 ```
 
 ```{r}
-report %>%  
+write_csv(report, "../result/race_ethnicity.csv")
 ```
 
+## Weakness acknowledgement
+Since the data only has the Region to be either equal to Twin Cities Metro Area or Greater Minnesota and no county, we cannot exactly identify a response to be a specific region of Minnesota.
 
-```{r}
-count_occurrences(report$A5E)
-```
-
-
+In addition, there is no specific information related to youth of color so I cannot incorporate that element into the final table.  

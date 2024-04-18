@@ -1,3 +1,9 @@
+---
+title: "Milestone 3 Blog"
+format: html
+editor: visual
+---
+
 ## Project Background
 
 For our project, we have partnered with Ignite Afterschool, an education and advocacy non-profit based in the Twin Cities, to update data briefs that they create for parents and the general public. We have utilized the Minnesota Student Survey to provide answers about afterschool engagement and outcomes across Minnesota which included analysis of disparities based on race, income, and region.
@@ -20,6 +26,7 @@ We've made significant progress in analyzing afterschool activities and monitori
 We've aggregated survey data to understand afterschool activity participation across different regions of Minnesota. For detailed insights, refer to the Part 2 bonus in the EngagedInAfterschool.rmd file.
 
 ```{r}
+library(readr)
 survey <- read_csv("../result/region_percent_survey.csv")
 survey
 ```

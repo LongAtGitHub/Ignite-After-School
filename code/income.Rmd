@@ -40,9 +40,22 @@ main <- main %>% left_join( county_code,
 main
 ```
 
+
+A16 = num of books in house
+A17A = access to internet
+A17B = own bedroom
+A17C = access to computer
+A17D = access to tablet
+A17D = access to phone
+A50 = has skipped meals because no food
+A66A = experienced homelessness
+
+
 ```{r}
 income_vars <- main %>%
-  select(County, A16, A17A, A17B, A17C, A17D, A17E, Region)
+  select(County, A16, A17A, A17B, A17C, A17D, A17E, A50, A66A, Region)
+
+income_vars
 ```
 
 
@@ -50,7 +63,7 @@ income_vars <- main %>%
 report <- income_vars %>%
   group_by(Region) %>%
   mutate(
-    high_income = if_else(A16 > 3 | A17A > 3 | A17B > 3, TRUE, FALSE)
+    high_income = if_else(A50==2 | A66A==0, TRUE, FALSE)
   ) %>%
   summarise(
     total = n(),

@@ -1,0 +1,112 @@
+---
+title: "mental_health_exploration"
+format: html
+editor: visual
+---
+
+## Mental Health
+
+```{r}
+library(readr)
+library(ggplot2)
+library(dplyr)
+```
+
+
+```{r}
+main <- read_csv("../data/MSS22-3CountyNoRace/MSS22-3CountyNoRace.csv")
+```
+
+23E. What are the reasons you missed a full or part of a day of school in the last 30 days? (Mark ALL that apply) - Felt very sad, hopeless, anxious, stressed or angry
+```{r}
+main %>% 
+  count(A23E)
+```
+
+A59A (L2 and L3 only) 59A. Over the past 2 weeks, how often have you been bothered by little interest or pleasure in doing things?
+```{r}
+main %>% 
+  count(A59A)
+```
+
+A59B (L2 and L3 only) 59B. Over the past 2 weeks, how often have you been bothered by feeling down, depressed or hopeless?
+```{r}
+main %>% 
+  count(A59B)
+    
+```
+
+
+A59C (L2 and L3 only) 59C. Over the past 2 weeks, how often have you been bothered by feeling nervous, anxious or on edge?
+```{r}
+main %>% 
+  count(A59C)
+```
+
+A59D (L2 and L3 only) 59D. Over the past 2 weeks, how often have you been bothered by not being able to stop or control worrying?
+```{r}
+main %>% 
+  count(A59D)
+```
+
+
+A71 (L2 and L3 only) 71. Do you live with anyone who is depressed or has any other mental health issues?
+
+A61A (L2 and L3 only) 61A. Have you ever seriously considered attempting suicide? (Mark ALL that apply) - No
+```{r}
+main %>% 
+  count(A61A)
+```
+
+A61B (L2 and L3 only) 61B. Have you ever seriously considered attempting suicide? (Mark ALL that apply) - Yes, during the last year
+```{r}
+main %>% 
+  count(A61B)
+```
+
+
+A61C (L2 and L3 only) 61C. Have you ever seriously considered attempting suicide? (Mark ALL that apply) - Yes, more than a year ago
+```{r}
+main %>% 
+  count(A61C)
+```
+
+
+A62A (L2 and L3 only) 62A. Have you ever actually attempted suicide? (Mark ALL that apply) - No
+```{r}
+main %>% 
+ count(A62A)
+```
+
+A62B (L2 and L3 only) 62B. Have you ever actually attempted suicide? (Mark ALL that apply) - Yes, during the last year
+```{r}
+main %>% 
+  count(A62B)
+```
+
+A62C (L2 and L3 only) 62C. Have you ever actually attempted suicide? (Mark ALL that apply) - Yes, more than a year ago
+```{r}
+main %>% count(A62C)
+```
+
+
+
+
+non cis: A10C, A10A, A10D, A10F, A10G, A10H, A10I, A10J 
+
+A12 (L2 and L3 only) 12. How do you describe your sexual orientation?
+1 straight
+2 asexual
+3 bisexual
+4 gay or lesbian
+5 questioning/not sure
+6 pansexual
+7 queer
+8 I don’t describe myself in any of these ways
+9 I am not sure what this question means 
+
+```{r}
+main %>% 
+  count(A12)
+```
+

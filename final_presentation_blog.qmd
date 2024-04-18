@@ -1,0 +1,17 @@
+---
+title: "final_presentation_blog"
+format: html
+editor: visual
+---
+
+# Ignite Afterschool 
+
+goals and summary
+
+![](images/Screenshot 2024-04-18 at 10.35.00 AM.png)
+
+## Challenges 
+
+## Data Exploration
+
+Explanation

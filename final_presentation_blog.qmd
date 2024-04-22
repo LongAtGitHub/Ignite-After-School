@@ -1,17 +1,86 @@
 ---
-title: "final_presentation_blog"
+title: "Ignite Afterschool Project Final Blog"
 format: html
 editor: visual
 ---
 
-# Ignite Afterschool 
+## Project Background
 
-goals and summary
+For our project, we have partnered with Ignite Afterschool, an education and advocacy non-profit based in the Twin Cities, to update data briefs that they create for parents and the general public. We have utilized the Minnesota Student Survey to provide answers about afterschool engagement and outcomes across Minnesota which included analysis of disparities based on race, income, and region.
 
-![](images/Screenshot 2024-04-18 at 10.35.00 AM.png)
+Our main questions were largely determined based on Ignite’s needs which were to update the existing briefs using the 2022 survey and have an understanding of what data was available including any information that may be relevant to the recent legalization of cannabis in Minnesota. We first identified variables of interest including race, variables related to being connected to a caring adult, engaging in after school activities 3 times a week, resource related variables, and region. We then found the variables related to drug and alcohol use and presented the available questions to Ignite.
 
-## Challenges 
+![Example Data Brief](images/data_brief.png){width="456"}
 
-## Data Exploration
+## Data Context
 
-Explanation
+Our main data source for this project will be the Minnesota Student Survey from 2022. According to the Minnesota Department of Education, the Minnesota Student Survey is one of the longest-running youth surveys in the United States. It is an anonymous statewide survey that is given to grades five, eight, nine, and eleven to gain insight into their experiences. For this project, we will be using the survey collected online by the state of Minnesota in collaboration with local schools in 2022. 
+
+The survey is taken every three years with changes made between each one such as wording or new questions. In every administration of the survey at least 81% of schools in Minnesota have participated, in 2022 there were approximately 135,000 individual responses (observations). 
+
+The results of the survey are posted publicly and used by non-state groups to assess student needs and hold public discussions. The state uses the data “to monitor trends, to assess the extent of disparities among population groups, to obtain federal and state funding, and to assist local communities and schools.” <https://education.mn.gov/MDE/dse/health/mss/mde059027> 
+
+## Survey Data Analysis
+
+First, we separated the survey data into different regions that match with those used in previous briefs.
+
+```{r, echo=FALSE, message=FALSE}
+library(readr)
+survey <- read_csv("result/region_percent_survey.csv")
+survey
+```
+
+Engagement in Afterschool Activities (3+ Times/Week) Through data wrangling, we've determined the number of students engaging in afterschool activities frequently.
+
+```{r, echo=FALSE, message=FALSE}
+afterschoolx3 <- read_csv("result/clean_afterschool_x3_report.csv")
+afterschoolx3
+```
+
+### Caring Adults
+
+We've examined the percentage of youth connected to caring adults across different regions, comparing it to 2017 data. This comparison helps us understand trends in adult-youth connections.
+
+```{r, echo=FALSE, message=FALSE}
+caring <- read_csv("result/clean_caringadult_report.csv")
+caring
+```
+
+### Income and Race
+
+```{r, echo=FALSE, message=FALSE}
+race <- read_csv("result/race_ethnicity.csv")
+race
+
+```
+
+```{r, echo=FALSE, message=FALSE}
+income <- read_csv("result/income.csv")
+income
+```
+
+### The Cannabis Report
+
+In MSS we identified the following key questions in line with Ignite's goals for expanding their cannabis education programming:
+
+1.  **Any alcohol and/or other drug** used during the past year
+2.  *During the last 12 months, **have you used marijuana** (pot, weed) or hashish (hash, hash oil) (*
+3.  *During the last 12 months on **how many occasions** (if any) have you used marijuana or hashish? (Do not count medical marijuana prescribed for you by a doctor)*
+4.  During the last 12 months, on how many occasions (if any) have you used **synthetic marijuana** that you took **only to get high**
+5.  *How much do you think people **risk harming themselves** physically or in other ways if they **use marijuana once or twice per week***
+
+### Tying Results Together
+
+The topics covered in our analysis hold significant importance for understanding youth behaviors and informing afterschool program initiatives. Our main questions revolve around:
+
+How are Minnesota youth engaging in afterschool activities, and what factors influence their participation? What is the role of caring adults in youth development, and how does it vary across regions? How do socioeconomic factors, such as income and race, intersect with afterschool engagement?
+
+What is the cannabis usage situation in Minnesota youth?
+
+Despite encountering data limitations, our analysis sheds light on key aspects. However, further data collection and refinement are necessary for a comprehensive understanding.
+
+## Main Takeaways and Future Directions
+
+Our analysis highlights the importance of afterschool programs and the need for targeted interventions to support youth development. While we've made progress in some areas, challenges remain, particularly in accessing relevant data. Future efforts should focus on addressing these challenges and expanding the scope of our analysis to encompass a broader range of factors influencing youth outcomes.
+
+It's essential to acknowledge the limitations of our analysis, including data constraints and ethical considerations regarding youth privacy. Moving forward, collaboration with relevant stakeholders and continued data collection efforts will enhance the depth and reliability of our findings.

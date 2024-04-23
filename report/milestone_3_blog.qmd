@@ -10,30 +10,19 @@ For our project, we have partnered with Ignite Afterschool, an education and adv
 
 Our main questions were largely determined based on Ignite’s needs which were to update the existing briefs using the 2022 survey and have an understanding of what data was available including any information that may be relevant to the recent legalization of cannabis in Minnesota. We first identified variables of interest including race, variables related to being connected to a caring adult, engaging in after school activities 3 times a week, resource related variables, and region. We then found the variables related to drug and alcohol use and presented the available questions to ignite.
 
-### Overall Status
-
-We've made significant progress in analyzing afterschool activities and monitoring the behaviors of Minnesota youth, updating briefs for Ignite Afterschool Non-Profit and analyzed the Cannabis situation. Here's an overview of our subtask progress:
-
--   Survey Data Analysis: Completed
--   Engagement in Afterschool Activities: Completed
--   Caring Adults: Completed
--   Income Gap: Ongoing, encountered roadblock
--   Race Ethnicity: Ongoing, encountered roadblock
--   Cannabis Report: Completed, Analyzed
-
 ### Survey Data Analysis
 
-We've aggregated survey data to understand afterschool activity participation across different regions of Minnesota. For detailed insights, refer to the Part 2 bonus in the EngagedInAfterschool.rmd file.
+First, we separated the survey data into different regions that match with those used in previous briefs.
 
-```{r}
+```{r, echo=FALSE, message=FALSE}
 library(readr)
 survey <- read_csv("../result/region_percent_survey.csv")
 survey
 ```
 
-Engagement in Afterschool Activities (3+ Times/Week) Through data wrangling, we've determined the number of students engaging in afterschool activities frequently. For more technical details, please refer to EngagedInAftersschool.rmd.
+Engagement in Afterschool Activities (3+ Times/Week) Through data wrangling, we've determined the number of students engaging in afterschool activities frequently.
 
-```{r}
+```{r, echo=FALSE, message=FALSE}
 afterschoolx3 <- read_csv("../result/clean_afterschool_x3_report.csv")
 afterschoolx3
 ```
@@ -42,20 +31,32 @@ afterschoolx3
 
 We've examined the percentage of youth connected to caring adults across different regions, comparing it to 2017 data. This comparison helps us understand trends in adult-youth connections.
 
-```{r}
+```{r, echo=FALSE, message=FALSE}
 caring <- read_csv("../result/clean_caringadult_report.csv")
 caring
 ```
 
 ### Income and Race
 
-Our analysis encountered roadblocks due to insufficient data. For race, we lack necessary variables, and for income, we're still working on gathering more data to draw meaningful insights.
+```{r, echo=FALSE, message=FALSE}
+race <- read_csv("../result/race_ethnicity.csv")
+race
+
+```
+
+```{r, echo=FALSE, message=FALSE}
+income <- read_csv("../result/income.csv")
+```
 
 ### The Cannabis Report
 
-In this section, we've focused on analyzing the Minnesota Cannabis Report. Unlike previous sections involving data wrangling, we've directly extracted relevant insights from the original report done directly by the Minnesota Department of Education. This approach offers a different perspective on understanding youth behaviors.
+In MSS we identified the following key questions in line with Ignite's goals for expanding their cannabis education programming:
 
-For a detailed analysis, please refer to the [Cannabis Report](https://docs.google.com/document/d/1L46I7ujxrKbMHMFkZnTt8oIH1bnxZcQj3Bjs2AhOSYs/edit?usp=sharing).
+1.  **Any alcohol and/or other drug** used during the past year
+2.  *During the last 12 months, **have you used marijuana** (pot, weed) or hashish (hash, hash oil) (*
+3.  *During the last 12 months on **how many occasions** (if any) have you used marijuana or hashish? (Do not count medical marijuana prescribed for you by a doctor)*
+4.  During the last 12 months, on how many occasions (if any) have you used **synthetic marijuana** that you took **only to get high**
+5.  *How much do you think people **risk harming themselves** physically or in other ways if they **use marijuana once or twice per week***
 
 ### Tying Results Together
 

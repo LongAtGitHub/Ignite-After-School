@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -98,35 +64,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="project-background">Project Background</h2>
 <p>For our project, we have partnered with Ignite Afterschool, an education and advocacy non-profit based in the Twin Cities, to update data briefs that they create for parents and the general public. We have utilized the Minnesota Student Survey to provide answers about afterschool engagement and outcomes across Minnesota which included analysis of disparities based on race, income, and region.</p>
 <p>Our main questions were largely determined based on Ignite’s needs which were to update the existing briefs using the 2022 survey and have an understanding of what data was available including any information that may be relevant to the recent legalization of cannabis in Minnesota. We first identified variables of interest including race, variables related to being connected to a caring adult, engaging in after school activities 3 times a week, resource related variables, and region. We then found the variables related to drug and alcohol use and presented the available questions to ignite.</p>
-<section id="overall-status" class="level3">
-<h3 class="anchored" data-anchor-id="overall-status">Overall Status</h3>
-<p>We’ve made significant progress in analyzing afterschool activities and monitoring the behaviors of Minnesota youth, updating briefs for Ignite Afterschool Non-Profit and analyzed the Cannabis situation. Here’s an overview of our subtask progress:</p>
-<ul>
-<li>Survey Data Analysis: Completed</li>
-<li>Engagement in Afterschool Activities: Completed</li>
-<li>Caring Adults: Completed</li>
-<li>Income Gap: Ongoing, encountered roadblock</li>
-<li>Race Ethnicity: Ongoing, encountered roadblock</li>
-<li>Cannabis Report: Completed, Analyzed</li>
-</ul>
-</section>
 <section id="survey-data-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="survey-data-analysis">Survey Data Analysis</h3>
-<p>We’ve aggregated survey data to understand afterschool activity participation across different regions of Minnesota. For detailed insights, refer to the Part 2 bonus in the EngagedInAfterschool.rmd file.</p>
+<p>First, we separated the survey data into different regions that match with those used in previous briefs.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../result/region_percent_survey.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 7 Columns: 4
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): Region
-dbl (3): region_perc, region_count, sum
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>survey</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 4
   Region       region_perc region_count    sum
@@ -140,20 +81,8 @@ dbl (3): region_perc, region_count, sum
 7 West Central        4.46         6044 135447</code></pre>
 </div>
 </div>
-<p>Engagement in Afterschool Activities (3+ Times/Week) Through data wrangling, we’ve determined the number of students engaging in afterschool activities frequently. For more technical details, please refer to EngagedInAftersschool.rmd.</p>
+<p>Engagement in Afterschool Activities (3+ Times/Week) Through data wrangling, we’ve determined the number of students engaging in afterschool activities frequently.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>afterschoolx3 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../result/clean_afterschool_x3_report.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 7 Columns: 5
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): Region
-dbl (4): percent_true, percent_false, percent_unknown, total
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>afterschoolx3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 5
   Region       percent_true percent_false percent_unknown total
@@ -172,18 +101,6 @@ dbl (4): percent_true, percent_false, percent_unknown, total
 <h3 class="anchored" data-anchor-id="caring-adults">Caring Adults</h3>
 <p>We’ve examined the percentage of youth connected to caring adults across different regions, comparing it to 2017 data. This comparison helps us understand trends in adult-youth connections.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>caring <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../result/clean_caringadult_report.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 7 Columns: 6
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): Region
-dbl (5): percent_true, percent_false, percent_unknown, total, PctIncreaseInD...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>caring</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 6
   Region  percent_true percent_false percent_unknown total PctIncreaseInDontCare
@@ -200,12 +117,26 @@ dbl (5): percent_true, percent_false, percent_unknown, total, PctIncreaseInD...
 </section>
 <section id="income-and-race" class="level3">
 <h3 class="anchored" data-anchor-id="income-and-race">Income and Race</h3>
-<p>Our analysis encountered roadblocks due to insufficient data. For race, we lack necessary variables, and for income, we’re still working on gathering more data to draw meaningful insights.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  Region                 white hmong american_indian
+  &lt;chr&gt;                  &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;
+1 Twin Cities Metro Area  78.0  66.5            70.1
+2 Greater Minnesota       77.7  64.7            69.0</code></pre>
+</div>
+</div>
 </section>
 <section id="the-cannabis-report" class="level3">
 <h3 class="anchored" data-anchor-id="the-cannabis-report">The Cannabis Report</h3>
-<p>In this section, we’ve focused on analyzing the Minnesota Cannabis Report. Unlike previous sections involving data wrangling, we’ve directly extracted relevant insights from the original report done directly by the Minnesota Department of Education. This approach offers a different perspective on understanding youth behaviors.</p>
-<p>For a detailed analysis, please refer to the <a href="https://docs.google.com/document/d/1L46I7ujxrKbMHMFkZnTt8oIH1bnxZcQj3Bjs2AhOSYs/edit?usp=sharing">Cannabis Report</a>.</p>
+<p>In MSS we identified the following key questions in line with Ignite’s goals for expanding their cannabis education programming:</p>
+<ol type="1">
+<li><strong>Any alcohol and/or other drug</strong> used during the past year</li>
+<li><em>During the last 12 months, <strong>have you used marijuana</strong> (pot, weed) or hashish (hash, hash oil) (</em></li>
+<li><em>During the last 12 months on <strong>how many occasions</strong> (if any) have you used marijuana or hashish? (Do not count medical marijuana prescribed for you by a doctor)</em></li>
+<li>During the last 12 months, on how many occasions (if any) have you used <strong>synthetic marijuana</strong> that you took <strong>only to get high</strong></li>
+<li><em>How much do you think people <strong>risk harming themselves</strong> physically or in other ways if they <strong>use marijuana once or twice per week</strong></em></li>
+</ol>
 </section>
 <section id="tying-results-together" class="level3">
 <h3 class="anchored" data-anchor-id="tying-results-together">Tying Results Together</h3>

@@ -8,13 +8,21 @@ editor: visual
 
 For our project, we have partnered with Ignite Afterschool, an education and advocacy non-profit based in the Twin Cities, to update data briefs that they create for parents and the general public. We have utilized the Minnesota Student Survey to provide answers about afterschool engagement and outcomes across Minnesota which included analysis of disparities based on race, income, and region.
 
-Our main questions were largely determined based on Ignite’s needs which were to update the existing briefs using the 2022 survey and have an understanding of what data was available including any information that may be relevant to the recent legalization of cannabis in Minnesota. We first identified variables of interest including race, variables related to being connected to a caring adult, engaging in after school activities 3 times a week, resource related variables, and region. We then found the variables related to drug and alcohol use and presented the available questions to Ignite.
+Our objectives for this project were:
 
-![Example Data Brief](images/data_brief.png){width="456"}
+1.  What information is available in the MSS (Minnesota Student Survey)  and how can we use it to update the existing briefs?
+
+2.  What other information may be helpful to ignite afterschool’s data briefs and how should we present our findings to them?
+
+3.  What questions on the survey relate to the recent legalization of cannabis in Minnesota? Are there other sources we could draw from to supplement the MSS?
+
+Our questions were largely determined based on Ignite’s needs which were to update the existing briefs using the 2022 survey and have an understanding of what data was available including any information that may be relevant to the recent legalization of cannabis in Minnesota. We first identified variables of interest including race, variables related to being connected to a caring adult, engaging in after school activities 3 times a week, resource related variables, and region. We then found the variables related to drug and alcohol use and presented the available questions to Ignite.
+
+![Example Data Brief](images/data_brief.png){fig-align="left" width="456"}
 
 ## Data Context
 
-Our main data source for this project will be the Minnesota Student Survey from 2022. According to the Minnesota Department of Education, the Minnesota Student Survey is one of the longest-running youth surveys in the United States. It is an anonymous statewide survey that is given to grades five, eight, nine, and eleven to gain insight into their experiences. For this project, we will be using the survey collected online by the state of Minnesota in collaboration with local schools in 2022. 
+Our main data source for this project was the Minnesota Student Survey from 2022. According to the Minnesota Department of Education, the Minnesota Student Survey is one of the longest-running youth surveys in the United States. It is an anonymous statewide survey that is given to grades five, eight, nine, and eleven to gain insight into student experiences. For this project, we will be using the survey collected online by the state of Minnesota in collaboration with local schools in 2022. 
 
 The survey is taken every three years with changes made between each one such as wording or new questions. In every administration of the survey at least 81% of schools in Minnesota have participated, in 2022 there were approximately 135,000 individual responses (observations). 
 
@@ -22,7 +30,7 @@ The results of the survey are posted publicly and used by non-state groups to as
 
 ## Survey Data Analysis
 
-First, we separated the survey data into different regions that match with those used in previous briefs.
+The first steps we had to take involved parsing through the large data dictionary and using two different csv files, one that included included county data but not race, and one that included race but no county data. We then group the observations by regions so that Ignite would be able to create regional briefs similar to the ones they have previously published. Below is a table that displays the regions:
 
 ```{r, echo=FALSE, message=FALSE}
 library(readr)
@@ -30,7 +38,9 @@ survey <- read_csv("result/region_percent_survey.csv")
 survey
 ```
 
-Engagement in Afterschool Activities (3+ Times/Week) Through data wrangling, we've determined the number of students engaging in afterschool activities frequently.
+Our project involved quite a bit of wrangling, as the questions Ignite wanted to answer in the briefs were not directly asked in the survey. For example, to determine if a student was engaged 3 or more times a week, we had to create a new variable that took into account a variety of engagement types. For our investigation of income we used the answers to questions about having enough food and stable shelter to determine if a student was low income or not. This process involved us communicating with Ignite to make these choices. but some assumptions were our own which we documented in the brief construction process.
+
+### Engaged Afterschool
 
 ```{r, echo=FALSE, message=FALSE}
 afterschoolx3 <- read_csv("result/clean_afterschool_x3_report.csv")
@@ -46,13 +56,14 @@ caring <- read_csv("result/clean_caringadult_report.csv")
 caring
 ```
 
-### Income and Race
+### Race
 
 ```{r, echo=FALSE, message=FALSE}
 race <- read_csv("result/race_ethnicity.csv")
 race
-
 ```
+
+### Income
 
 ```{r, echo=FALSE, message=FALSE}
 income <- read_csv("result/income.csv")
@@ -69,7 +80,7 @@ In MSS we identified the following key questions in line with Ignite's goals for
 4.  During the last 12 months, on how many occasions (if any) have you used **synthetic marijuana** that you took **only to get high**
 5.  *How much do you think people **risk harming themselves** physically or in other ways if they **use marijuana once or twice per week***
 
-### Tying Results Together
+### Place holder
 
 The topics covered in our analysis hold significant importance for understanding youth behaviors and informing afterschool program initiatives. Our main questions revolve around:
 

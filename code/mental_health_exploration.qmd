@@ -21,6 +21,28 @@ main <- read_csv("../data/MSS22-3CountyNoRace/MSS22-3CountyNoRace.csv")
 ```{r}
 main %>% 
   count(A23E)
+
+main %>% 
+  ggplot() +
+  geom_bar(aes(x=A23E))+
+  theme_minimal()+
+  facet_wrap(~A12)
+
+main %>% 
+mutate(
+    yes_missed_school = if_else(A23E >= 1, TRUE, FALSE)
+  ) %>%
+  summarise(
+    total = n(),
+    missed_school_true = sum(yes_missed_school == TRUE, na.rm = TRUE),
+    missed_school_false = sum(yes_missed_school == FALSE, na.rm = TRUE),
+    missed_school_na = sum(is.na(yes_missed_school)),
+    percent_true = missed_school_true / total *100,
+    percent_false =  missed_school_false / total *100,
+    percent_unknown = missed_school_na/ total * 100
+  ) 
+
+
 ```
 
 A59A (L2 and L3 only) 59A. Over the past 2 weeks, how often have you been bothered by little interest or pleasure in doing things?
@@ -62,6 +84,14 @@ A61B (L2 and L3 only) 61B. Have you ever seriously considered attempting suicide
 ```{r}
 main %>% 
   count(A61B)
+
+main %>% 
+  ggplot() +
+  geom_bar(aes(x=A61B))+
+  theme_minimal()+
+  facet_wrap(~A12)
+
+
 ```
 
 
@@ -76,12 +106,20 @@ A62A (L2 and L3 only) 62A. Have you ever actually attempted suicide? (Mark ALL t
 ```{r}
 main %>% 
  count(A62A)
+
+
 ```
 
 A62B (L2 and L3 only) 62B. Have you ever actually attempted suicide? (Mark ALL that apply) - Yes, during the last year
 ```{r}
 main %>% 
   count(A62B)
+
+main %>% 
+  ggplot() +
+  geom_bar(aes(x=A62B))+
+  theme_minimal()+
+  facet_wrap(~A12)
 ```
 
 A62C (L2 and L3 only) 62C. Have you ever actually attempted suicide? (Mark ALL that apply) - Yes, more than a year ago

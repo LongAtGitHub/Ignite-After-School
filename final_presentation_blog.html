@@ -63,8 +63,14 @@ ul.task-list li input[type="checkbox"] {
 <section id="project-background" class="level2">
 <h2 class="anchored" data-anchor-id="project-background">Project Background</h2>
 <p>For our project, we have partnered with Ignite Afterschool, an education and advocacy non-profit based in the Twin Cities, to update data briefs that they create for parents and the general public. We have utilized the Minnesota Student Survey to provide answers about afterschool engagement and outcomes across Minnesota which included analysis of disparities based on race, income, and region.</p>
-<p>Our main questions were largely determined based on Ignite’s needs which were to update the existing briefs using the 2022 survey and have an understanding of what data was available including any information that may be relevant to the recent legalization of cannabis in Minnesota. We first identified variables of interest including race, variables related to being connected to a caring adult, engaging in after school activities 3 times a week, resource related variables, and region. We then found the variables related to drug and alcohol use and presented the available questions to Ignite.</p>
-<div class="quarto-figure quarto-figure-center">
+<p>Our objectives for this project were:</p>
+<ol type="1">
+<li><p>What information is available in the MSS (Minnesota Student Survey)&nbsp; and how can we use it to update the existing briefs?</p></li>
+<li><p>What other information may be helpful to ignite afterschool’s data briefs and how should we present our findings to them?</p></li>
+<li><p>What questions on the survey relate to the recent legalization of cannabis in Minnesota? Are there other sources we could draw from to supplement the MSS?</p></li>
+</ol>
+<p>Our questions were largely determined based on Ignite’s needs which were to update the existing briefs using the 2022 survey and have an understanding of what data was available including any information that may be relevant to the recent legalization of cannabis in Minnesota. We first identified variables of interest including race, variables related to being connected to a caring adult, engaging in after school activities 3 times a week, resource related variables, and region. We then found the variables related to drug and alcohol use and presented the available questions to Ignite.</p>
+<div class="quarto-figure quarto-figure-left">
 <figure class="figure">
 <p><img src="images/data_brief.png" class="img-fluid figure-img" width="456"></p>
 <figcaption class="figure-caption">Example Data Brief</figcaption>
@@ -73,13 +79,13 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="data-context" class="level2">
 <h2 class="anchored" data-anchor-id="data-context">Data Context</h2>
-<p>Our main data source for this project will be the Minnesota Student Survey from 2022. According to the Minnesota Department of Education, the Minnesota Student Survey is one of the longest-running youth surveys in the United States. It is an anonymous statewide survey that is given to grades five, eight, nine, and eleven to gain insight into their experiences. For this project, we will be using the survey collected online by the state of Minnesota in collaboration with local schools in 2022.&nbsp;</p>
+<p>Our main data source for this project was the Minnesota Student Survey from 2022. According to the Minnesota Department of Education, the Minnesota Student Survey is one of the longest-running youth surveys in the United States. It is an anonymous statewide survey that is given to grades five, eight, nine, and eleven to gain insight into student experiences. For this project, we will be using the survey collected online by the state of Minnesota in collaboration with local schools in 2022.&nbsp;</p>
 <p>The survey is taken every three years with changes made between each one such as wording or new questions. In every administration of the survey at least 81% of schools in Minnesota have participated, in 2022 there were approximately 135,000 individual responses (observations).&nbsp;</p>
 <p>The results of the survey are posted publicly and used by non-state groups to assess student needs and hold public discussions. The state uses the data “to monitor trends, to assess the extent of disparities among population groups, to obtain federal and state funding, and to assist local communities and schools.” <a href="https://education.mn.gov/MDE/dse/health/mss/mde059027" class="uri">https://education.mn.gov/MDE/dse/health/mss/mde059027</a>&nbsp;</p>
 </section>
 <section id="survey-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="survey-data-analysis">Survey Data Analysis</h2>
-<p>First, we separated the survey data into different regions that match with those used in previous briefs.</p>
+<p>The first steps we had to take involved parsing through the large data dictionary and using two different csv files, one that included included county data but not race, and one that included race but no county data. We then group the observations by regions so that Ignite would be able to create regional briefs similar to the ones they have previously published. Below is a table that displays the regions:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 4
@@ -94,7 +100,9 @@ ul.task-list li input[type="checkbox"] {
 7 West Central        4.46         6044 135447</code></pre>
 </div>
 </div>
-<p>Engagement in Afterschool Activities (3+ Times/Week) Through data wrangling, we’ve determined the number of students engaging in afterschool activities frequently.</p>
+<p>Our project involved quite a bit of wrangling, as the questions Ignite wanted to answer in the briefs were not directly asked in the survey. For example, to determine if a student was engaged 3 or more times a week, we had to create a new variable that took into account a variety of engagement types. For our investigation of income we used the answers to questions about having enough food and stable shelter to determine if a student was low income or not. This process involved us communicating with Ignite to make these choices. but some assumptions were our own which we documented in the brief construction process.</p>
+<section id="engaged-afterschool" class="level3">
+<h3 class="anchored" data-anchor-id="engaged-afterschool">Engaged Afterschool</h3>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 5
@@ -109,6 +117,7 @@ ul.task-list li input[type="checkbox"] {
 7 West Central         76.2          23.8               0  6044</code></pre>
 </div>
 </div>
+</section>
 <section id="caring-adults" class="level3">
 <h3 class="anchored" data-anchor-id="caring-adults">Caring Adults</h3>
 <p>We’ve examined the percentage of youth connected to caring adults across different regions, comparing it to 2017 data. This comparison helps us understand trends in adult-youth connections.</p>
@@ -127,8 +136,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="income-and-race" class="level3">
-<h3 class="anchored" data-anchor-id="income-and-race">Income and Race</h3>
+<section id="race" class="level3">
+<h3 class="anchored" data-anchor-id="race">Race</h3>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
@@ -138,6 +147,9 @@ ul.task-list li input[type="checkbox"] {
 2 Greater Minnesota       77.7  64.7            69.0</code></pre>
 </div>
 </div>
+</section>
+<section id="income" class="level3">
+<h3 class="anchored" data-anchor-id="income">Income</h3>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 8
@@ -165,8 +177,8 @@ ul.task-list li input[type="checkbox"] {
 <li><em>How much do you think people <strong>risk harming themselves</strong> physically or in other ways if they <strong>use marijuana once or twice per week</strong></em></li>
 </ol>
 </section>
-<section id="tying-results-together" class="level3">
-<h3 class="anchored" data-anchor-id="tying-results-together">Tying Results Together</h3>
+<section id="place-holder" class="level3">
+<h3 class="anchored" data-anchor-id="place-holder">Place holder</h3>
 <p>The topics covered in our analysis hold significant importance for understanding youth behaviors and informing afterschool program initiatives. Our main questions revolve around:</p>
 <p>How are Minnesota youth engaging in afterschool activities, and what factors influence their participation? What is the role of caring adults in youth development, and how does it vary across regions? How do socioeconomic factors, such as income and race, intersect with afterschool engagement?</p>
 <p>What is the cannabis usage situation in Minnesota youth?</p>

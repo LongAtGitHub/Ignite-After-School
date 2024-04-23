@@ -10,7 +10,7 @@ library(stringr)
 
 From the document on county code name, create a table:
 ```{r}
-county <- read_excel("county_code_name.xlsx")
+county <- read_csv("county_code_name.csv")
 ```
 
 Based on this data, we can mutate to decide on the region of a county is in.

@@ -1,3 +1,8 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
 
 # Update data briefs on engagement after school
 
@@ -17,26 +22,31 @@ county_code <- read_csv("complete_county_dict.csv")
 main <- read_csv("../data/ignite_afterschool/MSS22-3CountyNoRace/MSS22-3CountyNoRace.csv")
 ```
 
-
 ## Assumption
 
 Use County No Race table MSS22-3CountyNoRace.csv
 
-Assume that all of the following counts as afterschool activities:
-- I stay at my school or go to another school \
-- My home or another home such as a friend's, relative's or neighbor's \
-- A rec, community or other youth center \
-- A park or other outdoor space \
-- A library \
-- A church, synagogue, mosque, or other spiritual/religious place \ 
+Assume that all of the following counts as afterschool activities: - I
+stay at my school or go to another school\
+- My home or another home such as a friend's, relative's or neighbor's\
+- A rec, community or other youth center\
+- A park or other outdoor space\
+- A library\
+- A church, synagogue, mosque, or other spiritual/religious place  
 
 These are A34A, A34B, A34C,.. A34F in the table.
-A34 value
-1-	0 days
-2-	1 day
-3-	2 days
-4-	3 to 4 days
-5-	5 days
+
+Level
+
+1- 0 days
+
+2- 1 day
+
+3- 2 days
+
+4- 3 to 4 days
+
+5- 5 days
 
 ## Wrangling
 
@@ -51,14 +61,6 @@ main
 ```{r}
 A34 <- main %>%
   select(County, A34A, A34B, A34C, A34D, A34D, A34E, A34F, Region)
-```
-
-```{r}
-# Identify rows with NA values
-rows_with_na <- A34[!complete.cases(A34), ]
-
-# Print rows with NA values
-print(rows_with_na)
 ```
 
 ```{r}
@@ -83,7 +85,9 @@ clean_report <- report %>%
 ```
 
 ## Result
-These show by region how many youths not regularly active in afterschool activities (>= 3 times a week).
+
+These show by region how many youths not regularly active in afterschool
+activities (\>= 3 times a week).
 
 ```{r}
 clean_report
@@ -110,6 +114,9 @@ region_perc <- region_perc %>%  select(Region, region_perc, region_count, sum)
 ```
 
 ```{r}
-write_csv(region_perc, "../result/region_percent_survey.csv")
+region_perc
 ```
 
+```{r}
+write_csv(region_perc, "../result/region_percent_survey.csv")
+```

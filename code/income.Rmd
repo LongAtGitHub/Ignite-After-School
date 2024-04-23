@@ -1,14 +1,17 @@
 ---
-title: "test_new_file"
+title: "Income"
 output: html_document
 date: "2024-03-06"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Update data briefs on engagement after school
+# Update data briefs on engagement after school (On going)
 
 ## Load libraries and data
 
@@ -23,12 +26,9 @@ county_code <- read_csv("complete_county_dict.csv")
 ```
 
 ```{r}
-main <- read_csv("../data/MSS22-3CountyNoRace/MSS22-3CountyNoRace.csv")
+main <- read_csv("../data/ignite_afterschool/MSS22-3CountyNoRace/MSS22-3CountyNoRace.csv")
 
 ```
-
-#A16
-#A17A-E
 
 ## Wrangling
 
@@ -40,16 +40,21 @@ main <- main %>% left_join( county_code,
 main
 ```
 
-
 A16 = num of books in house
-A17A = access to internet
-A17B = own bedroom
-A17C = access to computer
-A17D = access to tablet
-A17D = access to phone
-A50 = has skipped meals because no food
-A66A = experienced homelessness
 
+A17A = access to internet
+
+A17B = own bedroom
+
+A17C = access to computer
+
+A17D = access to tablet
+
+A17E = access to phone
+
+A50 = has skipped meals because no food
+
+A66A = experienced homelessness
 
 ```{r}
 income_vars <- main %>%
@@ -57,7 +62,6 @@ income_vars <- main %>%
 
 income_vars
 ```
-
 
 ```{r}
 report <- income_vars %>%
@@ -90,7 +94,10 @@ clean_report <- report %>%
 ```
 
 ## Result
+
 ```{r}
+
+clean_report
 write_csv(report, "../result/income.csv")
 write_csv(clean_report, "../result/clean_income.csv")
 

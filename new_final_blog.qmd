@@ -10,7 +10,7 @@ For our project, we have partnered with Ignite Afterschool, an education and adv
 
 Our objectives for this project were:
 
-1.  What information is available in the MSS (Minnesota Student Survey)  and how can we use it to update the existing briefs?
+1.  What information is available in the MSS (Minnesota Student Survey) and how can we use it to update the existing briefs?
 
 2.  What other information may be helpful to ignite afterschool’s data briefs and how should we present our findings to them?
 
@@ -43,28 +43,33 @@ Our project involved quite a bit of wrangling, as the questions Ignite wanted to
 
 ### Engaged Afterschool
 
+assume that all of the following counts as afterschool activities: - Istay at my school or go to another school- My home or another home such as a friend's, relative's or neighbor's- A rec, community or other youth center- A park or other outdoor space- A library- A church, synagogue, mosque, or other spiritual/religious place  
+
 ```{r, echo=FALSE, message=FALSE}
 afterschoolx3 <- read_csv("result/clean_afterschool_x3_report.csv")
 afterschoolx3
 ```
 
+#### By Race
+
+```{r, cho=FALSE, message=FALSE}
+race <- read_csv("result/race_ethnicity.csv")
+race
+
+```
+
 ### Caring Adults
 
-We've examined the percentage of youth connected to caring adults across different regions, comparing it to 2017 data. This comparison helps us understand trends in adult-youth connections.
+Answer of "quite a bit" or "very much" to EITHER of A56D(Teachers) or A56E(Other adults at school), which asks how much you feel a specific group cares about you
 
 ```{r, echo=FALSE, message=FALSE}
 caring <- read_csv("result/clean_caringadult_report.csv")
 caring
 ```
 
-### Race
-
-```{r, echo=FALSE, message=FALSE}
-race <- read_csv("result/race_ethnicity.csv")
-race
-```
-
 ### Income
+
+A50 = has skipped meals because no foodA66A = experienced homelessness
 
 ```{r, echo=FALSE, message=FALSE}
 income <- read_csv("result/income.csv")
@@ -172,11 +177,11 @@ make_pie_chart(c(9.33, 3.83,    11.16,  37.46,  38.22), "Girls")
 
 For results based on race we see 3 main categories.
 
-#### Highest Perception of risk: 
+#### Highest Perception of risk:
 
 White only, Asian or Asian American only and multiple races all had a greater amount of students who considered others using marijuana two or more times a week a "Great" risk to their health ranging.
 
-#### Lowest Perception of risk or not applicable: 
+#### Lowest Perception of risk or not applicable:
 
 American Indian or Alaskan Native and Native Hawaiian or Other Pacific Islanders in comparison had much lower amounts of students responding "Great" risk with more students selecting not applicable. It is important to note that these two racial groups are the smallest out of all respondents.
 
@@ -215,6 +220,8 @@ Despite encountering data limitations, our analysis sheds light on key aspects. 
 
 ## Main Takeaways and Future Directions
 
-Our analysis highlights the importance of afterschool programs and the need for targeted interventions to support youth development. While we've made progress in some areas, challenges remain, particularly in accessing relevant data. Future efforts should focus on addressing these challenges and expanding the scope of our analysis to encompass a broader range of factors influencing youth outcomes.
+This project is important for understanding youth behaviors, opinions, and their involvement with after school activities. New developments reflected in this survey are the COVID-19 pandemic and the legalization of cannabis in Minnesota. Our analysis updates the already known disparities in after school participation across race and class. Additionally, we find that cannabis usage amongst youth does not very significantly by race or region, but we did find that youth opinions on the risk of cannabis use does vary slightly by sex, with girls viewing usage as a greater risk than boys. We also see that across racial groups there is quite a bit of variation with some groups answering that there is a "Great" risk but ultimately the groups that did not rate the risk as high opted instead to select not applicable.
+
+Our project addressed key areas of the current Ignite Afterschool data briefs, but with the constraints of our project we were not able to reproduce all of the data required. In order to complete the briefs one would have to clarify and correct if necessary the
 
 It's essential to acknowledge the limitations of our analysis, including data constraints and ethical considerations regarding youth privacy. Moving forward, collaboration with relevant stakeholders and continued data collection efforts will enhance the depth and reliability of our findings.

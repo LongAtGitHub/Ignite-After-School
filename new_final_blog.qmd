@@ -18,7 +18,7 @@ Our objectives for this project were:
 
 Our questions were largely determined based on Ignite’s needs which were to update the existing briefs using the 2022 survey and have an understanding of what data was available including any information that may be relevant to the recent legalization of cannabis in Minnesota. We first identified variables of interest including race, variables related to being connected to a caring adult, engaging in after school activities 3 times a week, resource related variables, and region. We then found the variables related to drug and alcohol use and presented the available questions to Ignite.
 
-![Example Data Brief](images/data_brief.png){alt="Example Data Brief" fig-align="left" width="456"}
+![Example Data Brief](images/data_brief.png){fig-align="left" width="456"}
 
 ## Data Context
 

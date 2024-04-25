@@ -6,7 +6,7 @@ editor: visual
 
 ## Project Background
 
-For our project, we have partnered with Ignite Afterschool, an education and advocacy non-profit based in the Twin Cities, to update data briefs that they create for parents and the general public. We have utilized the Minnesota Student Survey to provide answers about afterschool engagement and outcomes across Minnesota which included analysis of disparities based on race, income, and region.
+For our project, we have partnered with Ignite Afterschool, an education and advocacy non-profit based in the Twin Cities, to update data briefs that they create for parents and the general public. We have utilized the Minnesota Student Survey to provide answers about after school engagement and outcomes across Minnesota which included analysis of disparities based on race, income, and region.
 
 Our objectives for this project were:
 
@@ -41,9 +41,16 @@ survey
 
 Our project involved quite a bit of wrangling, as the questions Ignite wanted to answer in the briefs were not directly asked in the survey. For example, to determine if a student was engaged 3 or more times a week, we had to create a new variable that took into account a variety of engagement types. For our investigation of income we used the answers to questions about having enough food and stable shelter to determine if a student was low income or not. This process involved us communicating with Ignite to make these choices. but some assumptions were our own which we documented in the brief construction process.
 
-### Engaged Afterschool
+### Engaged After school
 
-assume that all of the following counts as afterschool activities: - Istay at my school or go to another school- My home or another home such as a friend's, relative's or neighbor's- A rec, community or other youth center- A park or other outdoor space- A library- A church, synagogue, mosque, or other spiritual/religious place  
+We calculated if students did at least one of the following activities at least 3 times a week:
+
+1.  stay at my school or go to another school
+2.  My home or another home such as a friend's, relative's or neighbor's
+3.  A rec, community or other youth center
+4.  A park or other outdoor space
+5.  A library
+6.   A church, synagogue, mosque, or other spiritual/religious place  
 
 ```{r, echo=FALSE, message=FALSE}
 afterschoolx3 <- read_csv("result/clean_afterschool_x3_report.csv")
@@ -69,7 +76,7 @@ caring
 
 ### Income
 
-A50 = has skipped meals because no foodA66A = experienced homelessness
+Skipping meals and experiencing homelessness were used as a proxy for being low income. We also attempted to use resources like access to a laptop or tablet as a proxy, but found a similar study used these variables instead. Ensuring that this was the same way Ignite previously calculated low vs. high income is unfortunately outside of the scope of this project.
 
 ```{r, echo=FALSE, message=FALSE}
 income <- read_csv("result/income.csv")
@@ -208,20 +215,8 @@ plot9 <- make_pie_chart(c(3.97, 1.12, 3.61, 10.41, 80.89), "No answer")
 
 Students who did not answer the race question, also tended to select not applicable to the 5th cannabis question.
 
-### Place holder
-
-The topics covered in our analysis hold significant importance for understanding youth behaviors and informing afterschool program initiatives. Our main questions revolve around:
-
-How are Minnesota youth engaging in afterschool activities, and what factors influence their participation? What is the role of caring adults in youth development, and how does it vary across regions? How do socioeconomic factors, such as income and race, intersect with afterschool engagement?
-
-What is the cannabis usage situation in Minnesota youth?
-
-Despite encountering data limitations, our analysis sheds light on key aspects. However, further data collection and refinement are necessary for a comprehensive understanding.
-
 ## Main Takeaways and Future Directions
 
 This project is important for understanding youth behaviors, opinions, and their involvement with after school activities. New developments reflected in this survey are the COVID-19 pandemic and the legalization of cannabis in Minnesota. Our analysis updates the already known disparities in after school participation across race and class. Additionally, we find that cannabis usage amongst youth does not very significantly by race or region, but we did find that youth opinions on the risk of cannabis use does vary slightly by sex, with girls viewing usage as a greater risk than boys. We also see that across racial groups there is quite a bit of variation with some groups answering that there is a "Great" risk but ultimately the groups that did not rate the risk as high opted instead to select not applicable.
 
-Our project addressed key areas of the current Ignite Afterschool data briefs, but with the constraints of our project we were not able to reproduce all of the data required. In order to complete the briefs one would have to clarify and correct if necessary the
-
-It's essential to acknowledge the limitations of our analysis, including data constraints and ethical considerations regarding youth privacy. Moving forward, collaboration with relevant stakeholders and continued data collection efforts will enhance the depth and reliability of our findings.
+Our project addressed key areas of the current Ignite Afterschool data briefs, but with the constraints of our project we were not able to reproduce all of the data required. In order to complete the briefs one would have to clarify and correct if necessary the assumptions made in the wrangling and calculation process.

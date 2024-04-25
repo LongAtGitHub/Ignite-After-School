@@ -83,8 +83,8 @@ ul.task-list li input[type="checkbox"] {
 <p>The survey is taken every three years with changes made between each one such as wording or new questions. In every administration of the survey at least 81% of schools in Minnesota have participated, in 2022 there were approximately 135,000 individual responses (observations).&nbsp;</p>
 <p>The results of the survey are posted publicly and used by non-state groups to assess student needs and hold public discussions. The state uses the data “to monitor trends, to assess the extent of disparities among population groups, to obtain federal and state funding, and to assist local communities and schools.” <a href="https://education.mn.gov/MDE/dse/health/mss/mde059027" class="uri">https://education.mn.gov/MDE/dse/health/mss/mde059027</a>&nbsp;</p>
 </section>
-<section id="survey-data-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="survey-data-analysis">Survey Data Analysis</h2>
+<section id="analysis" class="level2">
+<h2 class="anchored" data-anchor-id="analysis">Analysis</h2>
 <p>The first steps we had to take involved parsing through the large data dictionary and using two different csv files, one that included included county data but not race, and one that included race but no county data. We then group the observations by regions so that Ignite would be able to create regional briefs similar to the ones they have previously published. Below is a table that displays the regions:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -176,7 +176,12 @@ ul.task-list li input[type="checkbox"] {
 <li>During the last 12 months, on how many occasions (if any) have you used <strong>synthetic marijuana</strong> that you took <strong>only to get high</strong></li>
 <li><em>How much do you think people <strong>risk harming themselves</strong> physically or in other ways if they <strong>use marijuana once or twice per week</strong></em></li>
 </ol>
-<p>Question 3</p>
+<p>We prioritized answering questions 3 and 5 per Ignite’s request and found that for question 3 there was very little variance in frequency of use across race and region as almost all students selected 0 times or not applicable.</p>
+</section>
+<section id="question-3" class="level3">
+<h3 class="anchored" data-anchor-id="question-3">Question 3</h3>
+<section id="during-the-last-12-months-on-how-many-occasions-if-any-have-you-used-marijuana-or-hashish-do-not-count-medical-marijuana-prescribed-for-you-by-a-doctor" class="level5">
+<h5 class="anchored" data-anchor-id="during-the-last-12-months-on-how-many-occasions-if-any-have-you-used-marijuana-or-hashish-do-not-count-medical-marijuana-prescribed-for-you-by-a-doctor"><em>During the last 12 months on <strong>how many occasions</strong> (if any) have you used marijuana or hashish? (Do not count medical marijuana prescribed for you by a doctor)</em></h5>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="new_final_blog_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="864"></p>
@@ -187,12 +192,31 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="new_final_blog_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="864"></p>
 </div>
 </div>
-<p>Question 5</p>
+</section>
+</section>
+<section id="question-5" class="level3">
+<h3 class="anchored" data-anchor-id="question-5">Question 5</h3>
+<section id="how-much-do-you-think-people-risk-harming-themselves-physically-or-in-other-ways-if-they-use-marijuana-once-or-twice-per-week" class="level5">
+<h5 class="anchored" data-anchor-id="how-much-do-you-think-people-risk-harming-themselves-physically-or-in-other-ways-if-they-use-marijuana-once-or-twice-per-week"><em>How much do you think people <strong>risk harming themselves</strong> physically or in other ways if they <strong>use marijuana once or twice per week</strong></em></h5>
+<p>For question 5 we found that there is a larger amount of girls (37%) than boys (33%) who consider others using marijuana two or more times a week a “Great” risk to their health.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="new_final_blog_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>For results based on race we see 3 main categories.</p>
+</section>
+<section id="highest-perception-of-risk" class="level4">
+<h4 class="anchored" data-anchor-id="highest-perception-of-risk">Highest Perception of risk:</h4>
+<p>White only, Asian or Asian American only and multiple races all had a greater amount of students who considered others using marijuana two or more times a week a “Great” risk to their health ranging.</p>
+</section>
+<section id="lowest-perception-of-risk-or-not-applicable" class="level4">
+<h4 class="anchored" data-anchor-id="lowest-perception-of-risk-or-not-applicable">Lowest Perception of risk or not applicable:</h4>
+<p>American Indian or Alaskan Native and Native Hawaiian or Other Pacific Islanders in comparison had much lower amounts of students responding “Great” risk with more students selecting not applicable. It is important to note that these two racial groups are the smallest out of all respondents.</p>
+</section>
+<section id="moderate-perception-of-risk" class="level4">
+<h4 class="anchored" data-anchor-id="moderate-perception-of-risk">Moderate Perception of risk:</h4>
+<p>Black, African or African American only, Hispanic or Latino/a only, and Middle Eastern or North African respondents were some where between the previous groups with lower levels of not applicable responses, but also lower levels of “Great” responses.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="new_final_blog_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
@@ -207,6 +231,8 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="new_final_blog_files/figure-html/unnamed-chunk-9-4.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Students who did not answer the race question, also tended to select not applicable to the 5th cannabis question.</p>
+</section>
 </section>
 <section id="place-holder" class="level3">
 <h3 class="anchored" data-anchor-id="place-holder">Place holder</h3>

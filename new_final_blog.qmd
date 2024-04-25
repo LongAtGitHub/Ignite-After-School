@@ -28,7 +28,7 @@ The survey is taken every three years with changes made between each one such as
 
 The results of the survey are posted publicly and used by non-state groups to assess student needs and hold public discussions. The state uses the data “to monitor trends, to assess the extent of disparities among population groups, to obtain federal and state funding, and to assist local communities and schools.” <https://education.mn.gov/MDE/dse/health/mss/mde059027> 
 
-## Survey Data Analysis
+## Analysis
 
 The first steps we had to take involved parsing through the large data dictionary and using two different csv files, one that included included county data but not race, and one that included race but no county data. We then group the observations by regions so that Ignite would be able to create regional briefs similar to the ones they have previously published. Below is a table that displays the regions:
 
@@ -84,6 +84,8 @@ In MSS we identified the following key questions in line with Ignite's goals for
 We prioritized answering questions 3 and 5 per Ignite's request and found that for question 3 there was very little variance in frequency of use across race and region as almost all students selected 0 times or not applicable.
 
 ### Question 3
+
+##### *During the last 12 months on **how many occasions** (if any) have you used marijuana or hashish? (Do not count medical marijuana prescribed for you by a doctor)*
 
 ```{r, echo=FALSE,message=FALSE,fig.height=5, fig.width=9}
 library(tidyr)
@@ -147,6 +149,8 @@ region_q3_plot
 ```
 
 ### Question 5
+
+##### *How much do you think people **risk harming themselves** physically or in other ways if they **use marijuana once or twice per week***
 
 For question 5 we found that there is a larger amount of girls (37%) than boys (33%) who consider others using marijuana two or more times a week a "Great" risk to their health.
 

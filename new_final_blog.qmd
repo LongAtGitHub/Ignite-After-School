@@ -81,7 +81,9 @@ In MSS we identified the following key questions in line with Ignite's goals for
 4.  During the last 12 months, on how many occasions (if any) have you used **synthetic marijuana** that you took **only to get high**
 5.  *How much do you think people **risk harming themselves** physically or in other ways if they **use marijuana once or twice per week***
 
-Question 3
+We prioritized answering questions 3 and 5 per Ignite's request and found that for question 3 there was very little variance in frequency of use across race and region as almost all students selected 0 times or not applicable.
+
+### Question 3
 
 ```{r, echo=FALSE,message=FALSE,fig.height=5, fig.width=9}
 library(tidyr)
@@ -144,7 +146,9 @@ region_q3_plot <- ggplot(data_long, aes(x = Time, y = Percentage)) +
 region_q3_plot
 ```
 
-Question 5
+### Question 5
+
+For question 5 we found that there is a larger amount of girls (37%) than boys (33%) who consider others using marijuana two or more times a week a "Great" risk to their health.
 
 ```{r, echo=FALSE, message=FALSE}
 library(gridExtra)
@@ -162,6 +166,20 @@ make_pie_chart(c(9.33, 3.83,    11.16,  37.46,  38.22), "Girls")
 
 ```
 
+For results based on race we see 3 main categories.
+
+#### Highest Perception of risk: 
+
+White only, Asian or Asian American only and multiple races all had a greater amount of students who considered others using marijuana two or more times a week a "Great" risk to their health ranging.
+
+#### Lowest Perception of risk or not applicable: 
+
+American Indian or Alaskan Native and Native Hawaiian or Other Pacific Islanders in comparison had much lower amounts of students responding "Great" risk with more students selecting not applicable. It is important to note that these two racial groups are the smallest out of all respondents.
+
+#### Moderate Perception of risk:
+
+Black, African or African American only, Hispanic or Latino/a only, and Middle Eastern or North African respondents were some where between the previous groups with lower levels of not applicable responses, but also lower levels of "Great" responses.
+
 ```{r, echo=FALSE, message=FALSE}
 par(mfrow=c(1, 3)) # Set up a 1x3 grid for plots
 plot7 <- make_pie_chart(c(9.92, 3.66, 11.16, 39.54, 35.72), "White only")
@@ -178,6 +196,8 @@ plot4 <- make_pie_chart(c(14.72, 3.99, 10.13, 24.44, 46.71), "Hispanic or Latino
 plot5 <- make_pie_chart(c(10.03, 2.44, 7.74, 27.22, 52.58), "Middle Eastern or North African")
 plot9 <- make_pie_chart(c(3.97, 1.12, 3.61, 10.41, 80.89), "No answer")
 ```
+
+Students who did not answer the race question, also tended to select not applicable to the 5th cannabis question.
 
 ### Place holder
 

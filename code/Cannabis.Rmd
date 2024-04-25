@@ -31,7 +31,7 @@ library(dplyr)
 ```
 
 ```{r}
-race_no_county <- read_csv("../data/ignite_afterschool/MSS22_Race_NoCounty/MSS22-3RaceNoCounty+Region.csv")
+race_no_county <- read_csv("../data/MSS22_Race_NoCounty/MSS22-3RaceNoCounty+Region.csv")
 ```
 
 ## Dictionary codebook
@@ -63,7 +63,7 @@ race_no_county <- read_csv("../data/ignite_afterschool/MSS22_Race_NoCounty/MSS22
 ## Question 5 broken down by region
 
 ```{r}
-data <- read_csv("../data/ignite_afterschool/MSS22-3CountyNoRace/MSS22-3CountyNoRace.csv")
+data <- read_csv("../data/MSS22-3CountyNoRace/MSS22-3CountyNoRace.csv")
 county_code <- read_csv("../code/complete_county_dict.csv")
 ```
 
@@ -103,6 +103,22 @@ report_5_race <- summarize_q5(race_no_county, "Race")
 report_5_biosex
 report_5_region 
 report_5_race
+
+# Pie Chart with Percentages
+make_pie_chart <- function(slices, title)
+    
+slices <- c(11.89, 3.14, 9.7, 32.64, 42.63)
+
+lbls <- c("No Risk", "Slight", "Moderate", "Great", "NA")
+pct <- round(slices/sum(slices)*100)
+lbls <- paste(lbls, pct)
+# add percents to labels
+lbls <- paste(lbls,"%",sep="") # ad % to labels
+pie(slices,labels = lbls, col=rainbow(length(lbls)),
+   main="Boy's Ratings on how much they think people risk harming themselves
+physically or in other ways if they use marijuana once or twice per week") 
+
+
 ```
 
 ## Question 2
@@ -136,6 +152,8 @@ report_3_race <- summarize_q3(race_no_county, "Race")
 ```
 
 ```{r}
+write_csv(report_3_region, "../result/report_3_region.csv")
+write_csv(report_3_race, "../result/report_3_race.csv")
 race_no_county
 report_3_race
 ```

@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -115,7 +81,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="data-context">Data Context</h2>
 <p>Our main data source for this project was the Minnesota Student Survey from 2022. According to the Minnesota Department of Education, the Minnesota Student Survey is one of the longest-running youth surveys in the United States. It is an anonymous statewide survey that is given to grades five, eight, nine, and eleven to gain insight into student experiences. For this project, we will be using the survey collected online by the state of Minnesota in collaboration with local schools in 2022.&nbsp;</p>
 <p>The survey is taken every three years with changes made between each one such as wording or new questions. In every administration of the survey at least 81% of schools in Minnesota have participated, in 2022 there were approximately 135,000 individual responses (observations).&nbsp;</p>
-<p>The results of the survey are posted publicly and used by non-state groups to assess student needs and hold public discussions. The state uses the data “to monitor trends, to assess the extent of disparities among population groups, to obtain federal and state funding, and to assist local communities and schools.” <a href="https://education.mn.gov/MDE/dse/health/mss/mde059027" class="uri">https://education.mn.gov/MDE/dse/health/mss/mde059027</a>&nbsp;</p>
+<p>According to the Minnesota Department of Education the results of the survey are posted publicly and used by non-state groups to assess student needs and hold public discussions. The state uses the data “to monitor trends, to assess the extent of disparities among population groups, to obtain federal and state funding, and to assist local communities and schools.” According the the Wilder Foundation, an organization that assisted the State in administrating the survey explains that the survey asks about “students’ feelings and experiences related to health and wellbeing, supportive and caring relationships, safety, and engagement in school and activities. It provides students with the opportunity to tell us how they are doing, and what they need to thrive.”</p>
+<p>It is important to consider that the survey is administered in school setting to students. Teachers and other staff provide the material and instruct students to complete the survey. Ultimately the survey requires student consent, but there is a still an underlying pressure to participate. Many factors by influence the data including reading level, English proficiency, trust in school and government, boredom, and many other important social contexts. For our project, students not answering questions poses the greatest challenge in interpreting results. As previously mentioned, students may not answer questions for a variety of reasons, and we should consider that an important part of the context when evaluating and representing the results of our analysis.</p>
+<p><a href="https://education.mn.gov/MDE/dse/health/mss/mde059027" class="uri">https://education.mn.gov/MDE/dse/health/mss/mde059027</a>&nbsp;</p>
+<p><a href="https://www.wilder.org/wilder-research/research-library/2022-minnesota-student-survey" class="uri">https://www.wilder.org/wilder-research/research-library/2022-minnesota-student-survey</a></p>
 </section>
 <section id="analysis" class="level2">
 <h2 class="anchored" data-anchor-id="analysis">Analysis</h2>
@@ -162,9 +131,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="by-race" class="level4">
 <h4 class="anchored" data-anchor-id="by-race">By Race</h4>
-<div class="cell" data-cho="false">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>race <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"result/race_ethnicity.csv"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>race</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
   Region                 white hmong american_indian
@@ -177,7 +144,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="caring-adults" class="level3">
 <h3 class="anchored" data-anchor-id="caring-adults">Caring Adults</h3>
-<p>Answer of “quite a bit” or “very much” to EITHER of A56D(Teachers) or A56E(Other adults at school), which asks how much you feel a specific group cares about you</p>
+<p>Answer of “quite a bit” or “very much” to if either teachers or another staff member at the school care about the student.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 6
@@ -222,7 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>During the last 12 months, on how many occasions (if any) have you used <strong>synthetic marijuana</strong> that you took <strong>only to get high</strong></li>
 <li><em>How much do you think people <strong>risk harming themselves</strong> physically or in other ways if they <strong>use marijuana once or twice per week</strong></em></li>
 </ol>
-<p>We prioritized answering questions 3 and 5 per Ignite’s request and found that for question 3 there was very little variance in frequency of use across race and region as almost all students selected 0 times or not applicable.</p>
+<p>We prioritized answering questions 3 and 5 per Ignite’s request and found that for question 3 there was very little variance in frequency of use across race and region as almost all students selected 0 times or did not answer.</p>
 </section>
 <section id="question-3" class="level3">
 <h3 class="anchored" data-anchor-id="question-3">Question 3</h3>
@@ -258,11 +225,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="lowest-perception-of-risk-or-not-applicable" class="level4">
 <h4 class="anchored" data-anchor-id="lowest-perception-of-risk-or-not-applicable">Lowest Perception of risk or not applicable:</h4>
-<p>American Indian or Alaskan Native and Native Hawaiian or Other Pacific Islanders in comparison had much lower amounts of students responding “Great” risk with more students selecting not applicable. It is important to note that these two racial groups are the smallest out of all respondents.</p>
+<p>American Indian or Alaskan Native and Native Hawaiian or Other Pacific Islanders in comparison had much lower amounts of students responding “Great” risk with more students giving no answer. It is important to note that these two racial groups are the smallest out of all respondents.</p>
 </section>
 <section id="moderate-perception-of-risk" class="level4">
 <h4 class="anchored" data-anchor-id="moderate-perception-of-risk">Moderate Perception of risk:</h4>
-<p>Black, African or African American only, Hispanic or Latino/a only, and Middle Eastern or North African respondents were some where between the previous groups with lower levels of not applicable responses, but also lower levels of “Great” responses.</p>
+<p>Black, African or African American only, Hispanic or Latino/a only, and Middle Eastern or North African respondents were some where between the previous groups with lower levels of no answer, but also lower levels of “Great” responses.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="new_final_blog_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
@@ -277,14 +244,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="new_final_blog_files/figure-html/unnamed-chunk-9-4.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Students who did not answer the race question, also tended to select not applicable to the 5th cannabis question.</p>
+<p>Students who did not answer the race question, also tended to not answer the 5th cannabis question.</p>
 </section>
 </section>
+</section>
+<section id="ethical-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="ethical-considerations">Ethical Considerations</h2>
+<p>While we did find some difference in opinions of the risk of cannabis by race and sex, we find that difference mainly comes from students not answering the question. Students may feel uncomfortable disclosing about cannabis because they were advised not to, cultural beliefs, or maybe they don’t have an opinion on the question. It is possible that this data could be used to focus cannabis education programs or as part of a larger explanation as to how groups respond to survey questions and have been socialized to perceive risk. However, from an ethical perspective we believe that further evidence is required to draw any conclusions and our analysis should only be used as a starting point. It is also crucial to consider how the results of our data may be misinterpreted or used to uphold racial stereotypes. The purpose of the survey is to collect information on how students think and feel, so the use of data should also serve the purpose of improving programming and education for students.</p>
+<p>Many non-profits like Ignite take an act role in closing the gaps that students face in education whether that be access to after school programming, or other disparities within Minnesota schools. Any policy and advocacy focused group should be fully informed as to how the data was collected, analyzed, and interpreted. This blog post serves to explain the findings of our project in an accessible manner. It is also an important consideration that we as students can make mistakes and because of this it is important to double check our findings before they may be published for public use like in a data brief.</p>
 </section>
 <section id="main-takeaways-and-future-directions" class="level2">
 <h2 class="anchored" data-anchor-id="main-takeaways-and-future-directions">Main Takeaways and Future Directions</h2>
-<p>This project is important for understanding youth behaviors, opinions, and their involvement with after school activities. New developments reflected in this survey are the COVID-19 pandemic and the legalization of cannabis in Minnesota. Our analysis updates the already known disparities in after school participation across race and class. Additionally, we find that cannabis usage amongst youth does not very significantly by race or region, but we did find that youth opinions on the risk of cannabis use does vary slightly by sex, with girls viewing usage as a greater risk than boys. We also see that across racial groups there is quite a bit of variation with some groups answering that there is a “Great” risk but ultimately the groups that did not rate the risk as high opted instead to select not applicable.</p>
-<p>Our project addressed key areas of the current Ignite Afterschool data briefs, but with the constraints of our project we were not able to reproduce all of the data required. In order to complete the briefs one would have to clarify and correct if necessary the assumptions made in the wrangling and calculation process.</p>
+<p>This project is important for understanding youth behaviors, opinions, and their involvement with after school activities. New developments reflected in this survey are the COVID-19 pandemic and the legalization of cannabis in Minnesota. Our analysis updates the already known disparities in after school participation across race and class. Additionally, we find that cannabis usage amongst youth does not vary significantly by race or region, but we did find that youth opinions on the risk of cannabis use does vary slightly by sex, with girls viewing usage as a greater risk than boys. We also see that across racial groups there is quite a bit of variation with some groups answering that there is a “Great” risk but ultimately the groups that did not rate the risk as high, simply did not answer the question instead of selection one of the other risk options.</p>
+<p>Our project addressed key areas of the current Ignite Afterschool data briefs, but with the constraints of our project we were not able to reproduce all of the data required. In order to complete the briefs one would have to clarify and correct if necessary the assumptions made in the wrangling and calculation process. Additionally future directions for this project could include a more in depth look at the cannabis questions and attempt to make comparisons with other states to provide more information to how legalization may affect students as this survey was taken in 2022 before the legalization of cannabis in Minnesota.</p>
 </section>
 
 </main>

@@ -64,7 +64,7 @@ afterschoolx3 <- read_csv("result/clean_afterschool_x3_report.csv")
 afterschoolx3
 ```
 
-#### By Race
+#### And By Race
 
 ```{r, echo=FALSE, message=FALSE}
 race <- read_csv("result/race_ethnicity.csv")

@@ -38,6 +38,10 @@ It is important to consider that the survey is administered in school setting to
 
 The first steps we had to take involved parsing through the large data dictionary and using two different csv files, one that included included county data but not race, and one that included race but no county data. We then group the observations by regions so that Ignite would be able to create regional briefs similar to the ones they have previously published. Below is a table that displays the regions:
 
+-   region_perc is the percent of the student sruvey respondents in each region out of all student survey respondents in the state.
+
+-   region count is the total number of respondents per region
+
 ```{r, echo=FALSE, message=FALSE}
 library(readr)
 library(ggplot2)
@@ -58,12 +62,24 @@ We calculated if students did at least one of the following activities at least 
 5.  A library
 6.  A church, synagogue, mosque, or other spiritual/religious place  
 
+-   percent_true is the percent of students who according to the above criteria are engaged after school
+
+-   percent_false is the percent of students who according to the above criteria are **not engaged** after school
+
+-   percent unknown represents students who do not have sufficient data to determine if they are engaged after school or not.
+
+-   total represents the count of all students in the region.
+
 ```{r, echo=FALSE, message=FALSE}
 afterschoolx3 <- read_csv("result/clean_afterschool_x3_report.csv")
 afterschoolx3
 ```
 
+Across all regions, approximately 75% of youth are engaged after school. The Southwest region has the lowest engagement at 72% and the Central and West Central regions have the most at approximately 76%.
+
 #### And By Race
+
+The below table represents how many students are involved after school in the metro area and greater Minnesota across three key race/ethnicities. In the Metro area, 78% of white students are engaged after school. Whereas in the Metro area 66.5% of Hmong and about 70% of American Indian youth are engaged after school.
 
 ```{r, echo=FALSE, message=FALSE}
 race <- read_csv("result/race_ethnicity.csv")
@@ -75,14 +91,42 @@ race
 
 Answer of "quite a bit" or "very much" to if either teachers or another staff member at the school care about the student.
 
+-   percent_true is the percent of students in the region that according to the above criteria are connected to a caring adult at school
+
+-   percent_false is the percent of students in the region that according to the above criteria are **not** connected to a caring adult at school
+
+-   percent_unknown represents students who do not have sufficient data to determine if they are connected to a caring adult or not (no answer).
+
+-   total represents the count of all students in the region.
+
+-   PctIncreaseInDontCare is the percentage point change from the 2019 MSS. A positive number indicates a region where **less** students have a caring adult. A negative number indicates **more** students having a caring adult than the previous survey.
+
 ```{r, echo=FALSE, message=FALSE}
 caring <- read_csv("result/clean_caringadult_report.csv")
 caring
 ```
 
+In central Minnesota approximately 45% of students do not have a caring adult at school, compared to 2019 where 42% of students did not have a caring adult.
+
+In Southern Minnesota, approximately 44% of students do not have a caring adult at school, compared to 2019 where 31% of students did not have a caring adult.
+
 ### Income
 
 Skipping meals and experiencing homelessness were used as a proxy for being low income. We also attempted to use resources like access to a laptop or tablet as a proxy, but found a similar study used these variables instead. Ensuring that this was the same way Ignite previously calculated low vs. high income is unfortunately outside of the scope of this project.
+
+-   total represents the count of all students in the region.
+
+-   high_income_true represents the count of students in the region who did not meet the above criteria of being low income.
+
+    -   percent_true represents this number as a percent
+
+-   high_income_false represents the count of students in the region who did meet the above criteria by either indicating they had skipped meals or experienced homelessness or lack of stable housing.
+
+    -   percent_false represents this number as a percent
+
+-   high income_na represents the students who did not provide an answer to at least one of the questions to determine income.
+
+    -   percent_unknown represents this number as a percent
 
 ```{r, echo=FALSE, message=FALSE}
 income <- read_csv("result/income.csv")
@@ -104,6 +148,10 @@ We prioritized answering questions 3 and 5 per Ignite's request and found that f
 ### Question 3
 
 ##### *During the last 12 months on **how many occasions** (if any) have you used marijuana or hashish? (Do not count medical marijuana prescribed for you by a doctor)*
+
+The below tables indicate that students in all regions are almost all selecting 0 times or do not answer the question. There is not enough variance across regions or race to show any significant difference in marijuana use.
+
+The number of students who have used marijuana once or more may be lower than the actual amount as students who have used marijuana may have opted to not answer the question. Questions related to drug use appear to have higher rates of "no answer" responses than other questions.
 
 ```{r, echo=FALSE,message=FALSE,fig.height=5, fig.width=9}
 library(tidyr)
@@ -173,20 +221,31 @@ region_q3_plot
 For question 5 we found that there is a larger amount of girls (37%) than boys (33%) who consider others using marijuana two or more times a week a "Great" risk to their health.
 
 ```{r, echo=FALSE, message=FALSE}
+library(ggplot2)
 library(gridExtra)
-make_pie_chart <- function(slices, title){
-lbls <- c("No Risk", "Slight", "Moderate", "Great", "NA")
-pct <- round(slices/sum(slices)*100)
-lbls <- paste(lbls, pct)
-# add percents to labels
-lbls <- paste(lbls,"%",sep="") # ad % to labels
-pie(slices,labels = lbls, col=rainbow(length(lbls)),   main= title) }
 
-par(mfrow=c(1, 2)) 
-make_pie_chart(c(11.89, 3.14, 9.7, 32.64, 42.63), "Boys")
-make_pie_chart(c(9.33, 3.83,    11.16,  37.46,  38.22), "Girls")
+make_bar_plot <- function(slices, title, xlim) {
+  df <- data.frame(Category = c("No Risk", "Slight", "Moderate", "Great", "NA"),
+                   Percentage = slices)
+  df <- df[order(-df$Percentage), ]  # Arrange in descending order
+  
+  ggplot(df, aes(x = Percentage, y = reorder(Category, Percentage), fill = Category)) +
+    geom_bar(stat = "identity") +
+    geom_text(aes(label = paste0(Percentage, "%")), hjust = -0.1, color = "black", size = 3) +  # Add percentage labels
+    labs(title = title, y = "Level of Risk") +
+    theme_minimal() +
+    theme(legend.position = "none") +
+    xlim(0, xlim)  # Set y-axis limits to 0-50%
+}
 
+grid.arrange(
+  make_bar_plot(c(11.89, 3.14, 9.7, 32.64, 42.63), "Boys", 50),
+  make_bar_plot(c(9.33, 3.83, 11.16, 37.46, 38.22), "Girls", 50),
+  ncol = 2
+)
 ```
+
+
 
 For results based on race we see 3 main categories.
 
@@ -194,38 +253,49 @@ For results based on race we see 3 main categories.
 
 White only, Asian or Asian American only and multiple races all had a greater amount of students who considered others using marijuana two or more times a week a "Great" risk to their health ranging.
 
+```{r, echo=FALSE, message=FALSE}
+  make_bar_plot(c(9.92, 3.66, 11.16, 39.54, 35.72), "White only", 60)
+  make_bar_plot(c(12.8, 3.53, 11.09, 35.4, 37.19), "Asian or Asian American only", 60)
+  make_bar_plot(c(10.37,3.7,11.12,33.93, 40.89), "Multiple Races", 60)
+
+
+```
+
 #### Lowest Perception of risk or not applicable:
 
 American Indian or Alaskan Native and Native Hawaiian or Other Pacific Islanders in comparison had much lower amounts of students responding "Great" risk with more students giving no answer. It is important to note that these two racial groups are the smallest out of all respondents.
+
+```{r, echo=FALSE, message=FALSE}
+  make_bar_plot(c(11.98,3.93, 6.96, 14.29, 62.84), "American Indian or Alaskan Native only", 75)
+  make_bar_plot(c(17.39, 2.48, 6.21, 12.11, 61.8), "Native Hawaiian or Other Pacific Islander only", 75)
+
+```
 
 #### Moderate Perception of risk:
 
 Black, African or African American only, Hispanic or Latino/a only, and Middle Eastern or North African respondents were some where between the previous groups with lower levels of no answer, but also lower levels of "Great" responses.
 
+
 ```{r, echo=FALSE, message=FALSE}
-par(mfrow=c(1, 3)) # Set up a 1x3 grid for plots
-plot7 <- make_pie_chart(c(9.92, 3.66, 11.16, 39.54, 35.72), "White only")
-plot2 <- make_pie_chart(c(12.8, 3.53, 11.09, 35.4, 37.19), "Asian or Asian American only")
-plot8 <- make_pie_chart(c(10.37,3.7,11.12,33.93, 40.89), "Multiple Races")
-par(mfrow=c(1, 2)) 
-# Set up a 1x2 grid for plots
-plot1 <- make_pie_chart(c(11.98,3.93, 6.96, 14.29, 62.84), "American Indian or Alaskan Native only")
-plot6 <- make_pie_chart(c(17.39, 2.48, 6.21, 12.11, 61.8), "Native Hawaiian or Other Pacific Islander only")
-par(mfrow=c(1, 3)) 
-# Set up a 1x3 grid for plots
-plot3 <- make_pie_chart(c(12.19, 2.1, 6.54, 22, 57.18), "Black, African or African American only")
-plot4 <- make_pie_chart(c(14.72, 3.99, 10.13, 24.44, 46.71), "Hispanic or Latino/a only")
-plot5 <- make_pie_chart(c(10.03, 2.44, 7.74, 27.22, 52.58), "Middle Eastern or North African")
-plot9 <- make_pie_chart(c(3.97, 1.12, 3.61, 10.41, 80.89), "No answer")
+
+  make_bar_plot(c(12.19, 2.1, 6.54, 22, 57.18), "Black, African or African American only", 60)
+  make_bar_plot(c(14.72, 3.99, 10.13, 24.44, 46.71), "Hispanic or Latino/a only", 60)
+  make_bar_plot(c(10.03, 2.44, 7.74, 27.22, 52.58), "Middle Eastern or North African", 60)
+
 ```
 
 Students who did not answer the race question, also tended to not answer the 5th cannabis question.
+```{r, echo=FALSE, message=FALSE}
+make_bar_plot(c(3.97, 1.12, 3.61, 10.41, 80.89), "No answer", 90)
+```
+
+
 
 ## Ethical Considerations
 
 While we did find some difference in opinions of the risk of cannabis by race and sex, we find that difference mainly comes from students not answering the question. Students may feel uncomfortable disclosing about cannabis because they were advised not to, cultural beliefs, or maybe they don't have an opinion on the question. It is possible that this data could be used to focus cannabis education programs or as part of a larger explanation as to how groups respond to survey questions and have been socialized to perceive risk. However, from an ethical perspective we believe that further evidence is required to draw any conclusions and our analysis should only be used as a starting point. It is also crucial to consider how the results of our data may be misinterpreted or used to uphold racial stereotypes. The purpose of the survey is to collect information on how students think and feel, so the use of data should also serve the purpose of improving programming and education for students.
 
-Many non-profits like Ignite take an act role in closing the gaps that students face in education whether that be access to after school programming, or other disparities within Minnesota schools. Any policy and advocacy focused group should be fully informed as to how the data was collected, analyzed, and interpreted. This blog post serves to explain the findings of our project in an accessible manner. It is also an important consideration that we as students can make mistakes and because of this it is important to double check our findings before they may be published for public use like in a data brief.
+Many non-profits like Ignite take an active role in closing the gaps that students face in education whether that be access to after school programming, or other disparities within Minnesota schools. Any policy and advocacy focused group should be fully informed as to how the data was collected, analyzed, and interpreted. This blog post serves to explain the findings of our project in an accessible manner. It is also an important consideration that we as students can make mistakes and because of this it is important to double check our findings before they may be published for public use like in a data brief.
 
 ## Main Takeaways and Future Directions
 

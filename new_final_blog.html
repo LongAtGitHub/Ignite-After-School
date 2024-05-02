@@ -89,6 +89,10 @@ ul.task-list li input[type="checkbox"] {
 <section id="analysis" class="level2">
 <h2 class="anchored" data-anchor-id="analysis">Analysis</h2>
 <p>The first steps we had to take involved parsing through the large data dictionary and using two different csv files, one that included included county data but not race, and one that included race but no county data. We then group the observations by regions so that Ignite would be able to create regional briefs similar to the ones they have previously published. Below is a table that displays the regions:</p>
+<ul>
+<li><p>region_perc is the percent of the student sruvey respondents in each region out of all student survey respondents in the state.</p></li>
+<li><p>region count is the total number of respondents per region</p></li>
+</ul>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 4
@@ -115,6 +119,12 @@ ul.task-list li input[type="checkbox"] {
 <li>A library</li>
 <li>A church, synagogue, mosque, or other spiritual/religious place &nbsp;</li>
 </ol>
+<ul>
+<li><p>percent_true is the percent of students who according to the above criteria are engaged after school</p></li>
+<li><p>percent_false is the percent of students who according to the above criteria are <strong>not engaged</strong> after school</p></li>
+<li><p>percent unknown represents students who do not have sufficient data to determine if they are engaged after school or not.</p></li>
+<li><p>total represents the count of all students in the region.</p></li>
+</ul>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 5
@@ -129,8 +139,10 @@ ul.task-list li input[type="checkbox"] {
 7 West Central         76.2          23.8               0  6044</code></pre>
 </div>
 </div>
+<p>Across all regions, approximately 75% of youth are engaged after school. The Southwest region has the lowest engagement at 72% and the Central and West Central regions have the most at approximately 76%.</p>
 <section id="and-by-race" class="level4">
 <h4 class="anchored" data-anchor-id="and-by-race">And By Race</h4>
+<p>The below table represents how many students are involved after school in the metro area and greater Minnesota across three key race/ethnicities. In the Metro area, 78% of white students are engaged after school. Whereas in the Metro area 66.5% of Hmong and about 70% of American Indian youth are engaged after school.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
@@ -145,6 +157,13 @@ ul.task-list li input[type="checkbox"] {
 <section id="caring-adults" class="level3">
 <h3 class="anchored" data-anchor-id="caring-adults">Caring Adults</h3>
 <p>Answer of “quite a bit” or “very much” to if either teachers or another staff member at the school care about the student.</p>
+<ul>
+<li><p>percent_true is the percent of students in the region that according to the above criteria are connected to a caring adult at school</p></li>
+<li><p>percent_false is the percent of students in the region that according to the above criteria are <strong>not</strong> connected to a caring adult at school</p></li>
+<li><p>percent_unknown represents students who do not have sufficient data to determine if they are connected to a caring adult or not (no answer).</p></li>
+<li><p>total represents the count of all students in the region.</p></li>
+<li><p>PctIncreaseInDontCare is the percentage point change from the 2019 MSS. A positive number indicates a region where <strong>less</strong> students have a caring adult. A negative number indicates <strong>more</strong> students having a caring adult than the previous survey.</p></li>
+</ul>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 6
@@ -159,10 +178,27 @@ ul.task-list li input[type="checkbox"] {
 7 West C…         49.0          42.9            8.17  6044                     5</code></pre>
 </div>
 </div>
+<p>In central Minnesota approximately 45% of students do not have a caring adult at school, compared to 2019 where 42% of students did not have a caring adult.</p>
+<p>In Southern Minnesota, approximately 44% of students do not have a caring adult at school, compared to 2019 where 31% of students did not have a caring adult.</p>
 </section>
 <section id="income" class="level3">
 <h3 class="anchored" data-anchor-id="income">Income</h3>
 <p>Skipping meals and experiencing homelessness were used as a proxy for being low income. We also attempted to use resources like access to a laptop or tablet as a proxy, but found a similar study used these variables instead. Ensuring that this was the same way Ignite previously calculated low vs.&nbsp;high income is unfortunately outside of the scope of this project.</p>
+<ul>
+<li><p>total represents the count of all students in the region.</p></li>
+<li><p>high_income_true represents the count of students in the region who did not meet the above criteria of being low income.</p>
+<ul>
+<li>percent_true represents this number as a percent</li>
+</ul></li>
+<li><p>high_income_false represents the count of students in the region who did meet the above criteria by either indicating they had skipped meals or experienced homelessness or lack of stable housing.</p>
+<ul>
+<li>percent_false represents this number as a percent</li>
+</ul></li>
+<li><p>high income_na represents the students who did not provide an answer to at least one of the questions to determine income.</p>
+<ul>
+<li>percent_unknown represents this number as a percent</li>
+</ul></li>
+</ul>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 8
@@ -195,6 +231,8 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="question-3">Question 3</h3>
 <section id="during-the-last-12-months-on-how-many-occasions-if-any-have-you-used-marijuana-or-hashish-do-not-count-medical-marijuana-prescribed-for-you-by-a-doctor" class="level5">
 <h5 class="anchored" data-anchor-id="during-the-last-12-months-on-how-many-occasions-if-any-have-you-used-marijuana-or-hashish-do-not-count-medical-marijuana-prescribed-for-you-by-a-doctor"><em>During the last 12 months on <strong>how many occasions</strong> (if any) have you used marijuana or hashish? (Do not count medical marijuana prescribed for you by a doctor)</em></h5>
+<p>The below tables indicate that students in all regions are almost all selecting 0 times or do not answer the question. There is not enough variance across regions or race to show any significant difference in marijuana use.</p>
+<p>The number of students who have used marijuana once or more may be lower than the actual amount as students who have used marijuana may have opted to not answer the question. Questions related to drug use appear to have higher rates of “no answer” responses than other questions.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="new_final_blog_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="864"></p>
@@ -222,14 +260,6 @@ ul.task-list li input[type="checkbox"] {
 <section id="highest-perception-of-risk" class="level4">
 <h4 class="anchored" data-anchor-id="highest-perception-of-risk">Highest Perception of risk:</h4>
 <p>White only, Asian or Asian American only and multiple races all had a greater amount of students who considered others using marijuana two or more times a week a “Great” risk to their health ranging.</p>
-</section>
-<section id="lowest-perception-of-risk-or-not-applicable" class="level4">
-<h4 class="anchored" data-anchor-id="lowest-perception-of-risk-or-not-applicable">Lowest Perception of risk or not applicable:</h4>
-<p>American Indian or Alaskan Native and Native Hawaiian or Other Pacific Islanders in comparison had much lower amounts of students responding “Great” risk with more students giving no answer. It is important to note that these two racial groups are the smallest out of all respondents.</p>
-</section>
-<section id="moderate-perception-of-risk" class="level4">
-<h4 class="anchored" data-anchor-id="moderate-perception-of-risk">Moderate Perception of risk:</h4>
-<p>Black, African or African American only, Hispanic or Latino/a only, and Middle Eastern or North African respondents were some where between the previous groups with lower levels of no answer, but also lower levels of “Great” responses.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="new_final_blog_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
@@ -240,11 +270,40 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <p><img src="new_final_blog_files/figure-html/unnamed-chunk-9-3.png" class="img-fluid" width="672"></p>
 </div>
+</div>
+</section>
+<section id="lowest-perception-of-risk-or-not-applicable" class="level4">
+<h4 class="anchored" data-anchor-id="lowest-perception-of-risk-or-not-applicable">Lowest Perception of risk or not applicable:</h4>
+<p>American Indian or Alaskan Native and Native Hawaiian or Other Pacific Islanders in comparison had much lower amounts of students responding “Great” risk with more students giving no answer. It is important to note that these two racial groups are the smallest out of all respondents.</p>
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="new_final_blog_files/figure-html/unnamed-chunk-9-4.png" class="img-fluid" width="672"></p>
+<p><img src="new_final_blog_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="new_final_blog_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="moderate-perception-of-risk" class="level4">
+<h4 class="anchored" data-anchor-id="moderate-perception-of-risk">Moderate Perception of risk:</h4>
+<p>Black, African or African American only, Hispanic or Latino/a only, and Middle Eastern or North African respondents were some where between the previous groups with lower levels of no answer, but also lower levels of “Great” responses.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="new_final_blog_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="new_final_blog_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="new_final_blog_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Students who did not answer the race question, also tended to not answer the 5th cannabis question.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="new_final_blog_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
 </section>
 </section>
